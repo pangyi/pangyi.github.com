@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://pangyi.github.io/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2014-09-16T21:39:18+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Test Again]]></title>
+    <link href="http://pangyi.github.io/blog/2014/09/14/test-again/"/>
+    <updated>2014-09-14T20:51:57+08:00</updated>
+    <id>http://pangyi.github.io/blog/2014/09/14/test-again</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Test With Octopress]]></title>
+    <link href="http://pangyi.github.io/blog/2014/09/14/test-with-octopress/"/>
+    <updated>2014-09-14T09:37:16+08:00</updated>
+    <id>http://pangyi.github.io/blog/2014/09/14/test-with-octopress</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
