@@ -3,7 +3,15 @@
   
   
   <url>
-    <loc>http://pangyi.github.io/blog/2014/09/14/test-again/</loc>
+    <loc>http://pangyi.github.io/blog/20141015/testtest/</loc>
+    
+    <lastmod>2014-10-15T23:45:52+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20140914/test-again/</loc>
     
     <lastmod>2014-09-14T20:51:57+08:00</lastmod>
     
@@ -11,7 +19,7 @@
   </url>
   
   <url>
-    <loc>http://pangyi.github.io/blog/2014/09/14/test-with-octopress/</loc>
+    <loc>http://pangyi.github.io/blog/20140914/test-with-octopress/</loc>
     
     <lastmod>2014-09-14T09:37:16+08:00</lastmod>
     
@@ -20,17 +28,17 @@
   
   
   <url>
-    <loc>http://pangyi.github.io/</loc>
-    <lastmod>2014-09-16T23:17:38+08:00</lastmod>
+    <loc>http://pangyi.github.io/blog/archives/</loc>
+    <lastmod>2014-10-21T23:27:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>http://pangyi.github.io/blog/archives/</loc>
-    <lastmod>2014-09-16T23:17:38+08:00</lastmod>
+    <loc>http://pangyi.github.io/</loc>
+    <lastmod>2014-10-21T23:27:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>1.0</priority>
   </url>
   
   

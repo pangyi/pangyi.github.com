@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-09-16T23:17:38+08:00</updated>
+  <updated>2014-10-21T23:27:34+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[PangYi]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
+    <title type="html"><![CDATA[Testtest]]></title>
+    <link href="http://pangyi.github.io/blog/20141015/testtest/"/>
+    <updated>2014-10-15T23:45:52+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141015/testtest</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Test Again]]></title>
-    <link href="http://pangyi.github.io/blog/2014/09/14/test-again/"/>
+    <link href="http://pangyi.github.io/blog/20140914/test-again/"/>
     <updated>2014-09-14T20:51:57+08:00</updated>
-    <id>http://pangyi.github.io/blog/2014/09/14/test-again</id>
+    <id>http://pangyi.github.io/blog/20140914/test-again</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Test With Octopress]]></title>
-    <link href="http://pangyi.github.io/blog/2014/09/14/test-with-octopress/"/>
+    <link href="http://pangyi.github.io/blog/20140914/test-with-octopress/"/>
     <updated>2014-09-14T09:37:16+08:00</updated>
-    <id>http://pangyi.github.io/blog/2014/09/14/test-with-octopress</id>
+    <id>http://pangyi.github.io/blog/20140914/test-with-octopress</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
