@@ -4,7 +4,7 @@
   <title><![CDATA[分类：octopress测试 | 松鼠窝]]></title>
   <link href="http://pangyi.github.io/blog/categories/octopressce-shi/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-10-21T23:36:10+08:00</updated>
+  <updated>2014-10-21T23:38:47+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -18,8 +18,7 @@
     <link href="http://pangyi.github.io/blog/20141015/testtest/"/>
     <updated>2014-10-15T23:45:52+08:00</updated>
     <id>http://pangyi.github.io/blog/20141015/testtest</id>
-    <content type="html"><![CDATA[<p>测试摘要显示
-_</p>
+    <content type="html"><![CDATA[<p>测试摘要显示_</p>
 
 <p>test</p>
 ]]></content>
