@@ -4,7 +4,7 @@
   <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-10-21T23:38:47+08:00</updated>
+  <updated>2014-10-26T11:27:24+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octoedit]]></title>
+    <link href="http://pangyi.github.io/blog/20141022/octoedit/"/>
+    <updated>2014-10-22T20:33:00+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141022/octoedit</id>
+    <content type="html"><![CDATA[<p>test octopressediter
+<!-- more --></p>
+
+<ul id="markdown-toc">
+  <li><a href="#test1">test1</a></li>
+  <li><a href="#test2">test2</a>    <ul>
+      <li><a href="#ttest1">ttest1</a></li>
+      <li><a href="#ttest2">ttest2</a></li>
+      <li><a href="#section">测试</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="test1">test1</h2>
+
+<p>333</p>
+
+<h2 id="test2">test2</h2>
+
+<h3 id="ttest1">ttest1</h3>
+
+<p>2</p>
+
+<h3 id="ttest2">ttest2</h3>
+
+<p>333</p>
+
+<h3 id="section">测试</h3>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Testtest]]></title>
