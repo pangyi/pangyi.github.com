@@ -45,32 +45,38 @@
   
   <url>
     <loc>http://pangyi.github.io/blog/archives/</loc>
-    <lastmod>2014-10-30T22:34:47+08:00</lastmod>
+    <lastmod>2014-11-01T20:34:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/</loc>
-    <lastmod>2014-10-30T22:34:47+08:00</lastmod>
+    <lastmod>2014-11-01T20:34:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/</loc>
-    <lastmod>2014-10-30T22:34:47+08:00</lastmod>
+    <lastmod>2014-11-01T20:34:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/test.html</loc>
-    <lastmod>2014-10-30T22:34:47+08:00</lastmod>
+    <lastmod>2014-11-01T20:34:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   
+  
+  <url>
+    <loc>http://pangyi.github.io/45912c5564.html</loc>
+    <lastmod>2014-11-01T20:29:42Z</lastmod>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
