@@ -4,7 +4,7 @@
   <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-11-01T20:34:22+08:00</updated>
+  <updated>2014-11-15T18:07:34+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -14,11 +14,112 @@
 
   
   <entry>
+    <title type="html"><![CDATA[测试文件头]]></title>
+    <link href="http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou/"/>
+    <updated>2014-11-05T23:03:36+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou</id>
+    <content type="html"><![CDATA[<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou/">http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[测试o]]></title>
+    <link href="http://pangyi.github.io/blog/20141103/ce-shi-o/"/>
+    <updated>2014-11-03T22:03:46+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141103/ce-shi-o</id>
+    <content type="html"><![CDATA[<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141103/ce-shi-o/">http://pangyi.github.io/blog/20141103/ce-shi-o/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[测试]]></title>
+    <link href="http://pangyi.github.io/blog/20141103/ce-shi/"/>
+    <updated>2014-11-03T21:42:41+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141103/ce-shi</id>
+    <content type="html"><![CDATA[<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141103/ce-shi/">http://pangyi.github.io/blog/20141103/ce-shi/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[测试代码高亮]]></title>
+    <link href="http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang/"/>
+    <updated>2014-11-03T12:24:53+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section">测试方法</a>    <ul>
+      <li><a href="#section-1">测试代码</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="section">测试方法</h1>
+
+<h2 id="section-1">测试代码</h2>
+
+<p>源代码，按Markdown语法进行默认的代码高亮的效果：</p>
+
+<pre><code>let g:octopress_path = "path/to/dir"
+</code></pre>
+
+<p>使用octopress的代码高亮进行显示的效果：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>测试语法高亮</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="vim"><span class="line"><span class="k">let</span> <span class="k">g</span>:octopress_path <span class="p">=</span> <span class="s2">&quot;path/to/dir&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>网上的一个例子</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>Discover if a number is prime</span><a href="http://www.noulakaz.net/weblog/2007/03/18/a-regular-expression-to-check-for-prime-numbers/">Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">class</span> <span class="nc">Fixnum</span>
+</span><span class="line"> <span class="k">def</span> <span class="nf">prime?</span>
+</span><span class="line">  <span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">*</span> <span class="nb">self</span><span class="p">)</span> <span class="o">!~</span> <span class="sr">/^1?$|^(11+?)\1+$/</span>
+</span><span class="line"> <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>再加一行</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang/">http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Test Tag]]></title>
     <link href="http://pangyi.github.io/blog/20141028/test-tag/"/>
     <updated>2014-10-28T00:42:00+08:00</updated>
     <id>http://pangyi.github.io/blog/20141028/test-tag</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>i</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141028/test-tag/">http://pangyi.github.io/blog/20141028/test-tag/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
 ]]></content>
   </entry>
   
@@ -55,6 +156,12 @@
 <p>333</p>
 
 <h3 id="section">测试</h3>
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141022/octoedit/">http://pangyi.github.io/blog/20141022/octoedit/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
 ]]></content>
   </entry>
   
@@ -65,7 +172,13 @@
     <id>http://pangyi.github.io/blog/20141015/testtest</id>
     <content type="html"><![CDATA[<p>测试摘要显示_</p>
 
-<p>test</p>
+<p>test
+&lt;p class=&#8217;post-footer&#8217;&gt;
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141015/testtest/">http://pangyi.github.io/blog/20141015/testtest/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+ posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+&lt;/p&gt;</p>
 ]]></content>
   </entry>
   
@@ -74,7 +187,12 @@
     <link href="http://pangyi.github.io/blog/20140914/test-again/"/>
     <updated>2014-09-14T20:51:57+08:00</updated>
     <id>http://pangyi.github.io/blog/20140914/test-again</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20140914/test-again/">http://pangyi.github.io/blog/20140914/test-again/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
 ]]></content>
   </entry>
   
@@ -83,7 +201,12 @@
     <link href="http://pangyi.github.io/blog/20140914/test-with-octopress/"/>
     <updated>2014-09-14T09:37:16+08:00</updated>
     <id>http://pangyi.github.io/blog/20140914/test-with-octopress</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20140914/test-with-octopress/">http://pangyi.github.io/blog/20140914/test-with-octopress/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
 ]]></content>
   </entry>
   
