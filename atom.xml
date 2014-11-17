@@ -4,7 +4,7 @@
   <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-11-15T21:06:26+08:00</updated>
+  <updated>2014-11-17T23:19:27+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -98,12 +98,19 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 
 <p>再加一行</p>
 
-<p class="post-footer">
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">``` [language] [title] [url] [link text]
+</span><span class="line">code snippet</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>&#8220;`</p>
+
+<p>测试
+&lt;p class=&#8217;post-footer&#8217;&gt;
 原文链接地址：
 <a href="http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang/">http://pangyi.github.io/blog/20141103/ce-shi-dai-ma-gao-liang/</a><br />
 written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
+ posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+&lt;/p&gt;</p>
 ]]></content>
   </entry>
   
