@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: vim | 松鼠窝]]></title>
+  <link href="http://pangyi.github.io/tags/vim/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2014-12-22T21:16:25+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[PangYi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[增加octopress的说明和目录的VIM函数和快捷键配置]]></title>
+    <link href="http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/"/>
+    <updated>2014-11-23T16:25:39+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi</id>
+    <content type="html"><![CDATA[<p>照猫画虎，写了一个函数，并加了一个快捷键，为octopress文章增加一些特定的内容，好在文章列表和首页处显示文章简介或摘要，并给文章建立目录。</p>
+
+<p>之所以把这两部分合并在一起，是因为加了目录后，目录就成了文章最前面的内容，这时目录会作为文章开头内容显示在首页，不大好看，所以这两个东东一般是要配合使用的。</p>
+
+<p>所需要增加的内容如下：</p>
+
+<pre><code>&lt;!-- more --&gt;
+
+* list element with functor item
+{:toc}
+</code></pre>
+
+<p>实现这一功能的函数放在.vimrc中，代码如下：</p>
+
+<p>&#8220;`vim
+map <f7> :call OctopressIndex()<cr>&#8217;s
+function OctopressIndex()
+    call append(18,&#8221;&#8220;)
+    call append(19,&#8221;<!-- more -->&#8221;)
+    call append(20,&#8221;&#8220;)
+    call append(21,&#8221;* list element with functor item&#8221;)
+    call append(22,&#8221;{:toc}&#8221;)
+    call append(23,&#8221;&#8220;)</cr></f7></p>
+
+<pre><code>echohl WarningMsg | echo "Successful in adding the Octopress Index and read on." | echohl None endfunction ```
+</code></pre>
+
+<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+
+<p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
+
+]]></content>
+  </entry>
+  
+</feed>

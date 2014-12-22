@@ -4,7 +4,7 @@
   <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-11-20T21:58:42+08:00</updated>
+  <updated>2014-12-22T21:16:25+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -12,6 +12,545 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[网络测试工具netperf]]></title>
+    <link href="http://pangyi.github.io/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/"/>
+    <updated>2014-12-10T22:00:06+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141210/wang-luo-ce-shi-gong-ju-netperf</id>
+    <content type="html"><![CDATA[<p>一般我们进行网络测试，主要是测试网络的连通性、网络带宽、网络响应时间等。常用的工具包括ping、traceroute、telnet、ftp等。如测试网络连通性，可以使用ping，traceroute，如果测试防火墙是否配置正确，可以使用telnet和traceroute -p，使用ping命令可以测试网络延迟，ftp则用来测试网络带宽。</p>
+
+<p>但如果需要做一些更为深入的测试，如测试不同包大小的不同类型的业务的网络处理能力，则需要更专业的工具，如netperf，iperf等。</p>
+
+<h2 id="netperf">netperf测试工具介绍</h2>
+
+<p><a href="http://www.netperf.org/">netperf</a>是一个开源的网络性能测试工具。可以在AIX和LINUX平台上安装，支持跨平台使用。</p>
+
+<p>netperf可以进行的测试TCP网络性能、UDP网络性能，并且可以模拟Client/Server长连接或短连接场景，因此能更接近实际网络的使用环境进行测试和评估。</p>
+
+<h2 id="section">安装</h2>
+
+<p>从<a href="http://www.netperf.org/">官方网站</a>可以下载源代码进行编译安装。安装过程基本上是老三步，即</p>
+
+<pre><code>./configcure
+make
+make install
+</code></pre>
+
+<p>默认安装路径是/usr/local下的各目录。在AIX等系统中，可能需要自己设置PATH环境变量，或使用–prefix参数更改安装路径。</p>
+
+<p>对于<em>SUSE</em>，在安装中发现，在内核版本为2.6.16(SUSE 10)时，会出现编译错误：</p>
+
+<pre><code>nettest_omni.o: In function `recv_data_no_copy':
+nettest_omni.c:(.text+0x6e44): undefined reference to `splice'
+nettest_omni.c:(.text+0x6e7b): undefined reference to `splice'
+collect2: ld returned 1 exit status
+make[3]: *** [netperf] Error 1
+make[3]: Leaving directory `/root/py/netperf-2.6.0/src'
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory `/root/py/netperf-2.6.0/src'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/root/py/netperf-2.6.0'
+</code></pre>
+
+<p>经查，splice系统调用是在2.6.17内核版本以后出现的，因此换用SUSE 11编译通过。</p>
+
+<p>如果是UBUNTU之类的版本，因为软件库中已经有了netperf，可以用包管理器安装。比如UBUNTU中使用：</p>
+
+<pre><code>sudo apt-get install netperf
+</code></pre>
+
+<h2 id="section-1">使用</h2>
+
+<h3 id="section-2">启动服务</h3>
+
+<p>netperf包括两个程序。一个是客户端netperf，用于模拟各类网络行为。另一个为服务器程序netserver。用于接收客户端的请求。启动服务的操作类似于：</p>
+
+<pre><code># netserver
+Starting netserver with host 'IN(6)ADDR_ANY' port '12865' and family AF_UNSPEC
+</code></pre>
+
+<p>默认情况下TCP服务的监听启动在12865端口上。可以通过-p参数修改。</p>
+
+<p>未发现使用了哪个UDP端口，估计是在测试时根据netperf启用的测试项目再启用端口的。</p>
+
+<h3 id="netperf-1">netperf参数说明</h3>
+
+<p>netperf的参数格式如下：</p>
+
+<pre><code>netperf [global options] -- [test options] 
+</code></pre>
+
+<p>其中，global options为通用参数，所有测试项目都涉及或是公共的参数，常用的有：</p>
+
+<p>-H 主机名或IP		指定运行netserver的服务器的IP</p>
+
+<p>-l 测试时长		指定测试的时间长度，单位为秒</p>
+
+<p>-t 测试项目		指定测试的内容。测试项目如下：</p>
+
+<p>TCP批量数据传输测试                     TCP_STREAM</p>
+
+<pre><code>                 TCP_SENDFILE
+
+                 TCP_MAERTS
+</code></pre>
+
+<p>TCP请求应答（长连接）模式测试                     TCP_RR</p>
+
+<pre><code>                 TCP_CRR
+</code></pre>
+
+<p>UCP批量数据传输测试                    UDP_STREAM</p>
+
+<pre><code>                 UDP_RR
+
+                 DLCO_STREAM
+
+                 DLCO_RR
+
+                 DLCL_STREAM
+
+                 DLCL_RR
+
+                 STREAM_STREAM
+
+                 STREAM_RR
+
+                 DG_STREAM
+
+                 DG_RR
+
+                 SCTP_STREAM
+
+                 SCTP_STREAM_MANY
+
+                 SCTP_RR
+
+                 SCTP_RR_MANY
+
+                 LOC_CPU
+
+                 REM_CPU
+</code></pre>
+
+<p>test specific options是测试项用的参数，它与全局参数之间要用“–”分开类似</p>
+
+<pre><code>netperf -H 127.0.0.1 -l 30 -- -m 2048
+</code></pre>
+
+<p>测试项参数与测试项目相关。</p>
+
+<h2 id="section-3">常用测试项目</h2>
+
+<h3 id="section-4">网络带宽测试</h3>
+
+<p>带宽测试一般使用-t TCP_STREAM测试项，这也是netperf的默认测试项目。此项测试与ftp类似可以测试系统的带宽，但可以通过参数进行更多的设置。比如：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384  16384    60.00    2760.70 
+</code></pre>
+
+<p>第一列为服务端接收包的Socket缓冲区大小，这里没87380</p>
+
+<p>第二列为客户端发送数据的Socket缓冲区大小，这里为16384</p>
+
+<p>第三列为发送的消息的大小，这里为16384</p>
+
+<p>第四列为测试时长</p>
+
+<p>第五列为测试的速率，单位为M，这里结果为2.7G。因为使用的是localhost，实际是在本机的内存中收发的数据。</p>
+
+<p>TCP_STREAM的常用测试参数有：</p>
+
+<p>-s 缓冲区大小	指定客户端发送数据的缓冲区大小
+-S 缓冲区大小	指定服务端接收数据的缓冲区大小</p>
+
+<p>-m 发送消息大小	单位为bytes</p>
+
+<p>-M 接收消息大小	单位为bytes</p>
+
+<p>可以调整这些参数，了解哪些因素对传输速率有影响。比如将发送缓冲变大，测试结果变化不大：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ netperf -H 127.0.0.1 -l 60 -- -s 65535
+</span><span class="line">MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+</span><span class="line">Recv   Send    Send                          
+</span><span class="line">Socket Socket  Message  Elapsed              
+</span><span class="line">Size   Size    Size     Time     Throughput  
+</span><span class="line">bytes  bytes   bytes    secs.    10^6bits/sec  
+</span><span class="line">
+</span><span class="line"> 87380 131070 131070    60.00    2672.42   </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>而改变接收缓冲和发包大小，则可以提升性能：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -- -S 65535 
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+131070  16384  16384    60.00    3058.22   
+$ netperf -H 127.0.0.1 -l 60 -- -m 65535
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+Recv   Send    Send                          
+Socket Socket  Message  Elapsed              
+Size   Size    Size     Time     Throughput  
+bytes  bytes   bytes    secs.    10^6bits/sec  
+
+ 87380  16384  65535    60.00    3266.55   
+</code></pre>
+
+<h3 id="udp">UDP协议的传输性能</h3>
+
+<p>与网络带宽测试类似，只是更换了协议，所以这个项目是UDP_STREAM：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -t UDP_STREAM
+MIGRATED UDP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+Socket  Message  Elapsed      Messages                
+Size    Size     Time         Okay Errors   Throughput
+bytes   bytes    secs            #      #   10^6bits/sec
+
+212992   65507   60.00      440506      0    3847.46
+212992           60.00      433151           3783.22
+</code></pre>
+
+<p>与TCP_STREAM不太一样，测试结果中有两行数据。第一行是客户端的，第二行是服务端。</p>
+
+<p>第一列为缓冲区大小，在netperf测试中，两端的缓冲区大小会设置成一样大。</p>
+
+<p>第二列为消息大小</p>
+
+<p>第三列为测试传输时间</p>
+
+<p>第四列为传输数据包量，UDP由于协议不保证传输可靠性，收发消息数量不一样多，而且实际生产环境收包量可能比发包少得更多。从数据看，这个包数量应是每秒数量（消息大小和速度的单位不一样）</p>
+
+<p>最后是测试的速率，可以看到要比TCP协议快一些。这是协议决定的。</p>
+
+<h3 id="tcp">TCP长连接请求应答模式测试</h3>
+
+<p>除了网络数据传输，大量的网络流量是请求/应答式的，即一方发送一个报文，另一方回复一个。而且通常这类请求和回复的报文大小不一样大，甚至差别很大。netperf可以简单模拟这类应用场景，进行网络性能测试。测试使用类型为TCP_RR。</p>
+
+<p>最简单的TCP_RR测试如下：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -t TCP_RR
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo : first burst 0
+Local /Remote
+Socket Size   Request  Resp.   Elapsed  Trans.
+Send   Recv   Size     Size    Time     Rate         
+bytes  Bytes  bytes    bytes   secs.    per sec   
+
+16384  87380  1        1       60.00    13517.65   
+16384  87380 
+</code></pre>
+
+<p>测试结果分为两行，第一行是本地，第二行是远端（服务端）</p>
+
+<p>第一列和第二列应该还是缓冲区，只是和STREAM测试的顺序相反。</p>
+
+<p>第三、四列为请求和返回包的大小。默认为1位。</p>
+
+<p>第五列为测试时间</p>
+
+<p>第六列为交易速率，这次是笔数/每秒，不再是带宽。</p>
+
+<p>默认的包大小实际业务中不可能发生，可以通过参数进行调整，来模拟真实的情况。使用测试参数-r 请求包大小,应答包大小（-r request,response）来测试。注意此参数单位为BYTES，实际的业务一般是以字节为单位的报文：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -t TCP_RR -- -r 64,2048
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo : first burst 0
+Local /Remote
+Socket Size   Request  Resp.   Elapsed  Trans.
+Send   Recv   Size     Size    Time     Rate         
+bytes  Bytes  bytes    bytes   secs.    per sec   
+
+16384  87380  64       2048    60.00    13129.09   
+16384  87380 
+</code></pre>
+
+<p>此测试使用8字节的请求，256字节的返应答包进行测试，测试结果相对默认值轻微下降。</p>
+
+<h3 id="tcp-1">TCP短连接请求应答模式测试</h3>
+
+<p>TCP请求的另一大类是类似HTTP业务的短连接请求应答报文。对应的测试项是TCP_CRR：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -t TCP_CRR             
+MIGRATED TCP Connect/Request/Response TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo
+Local /Remote
+Socket Size   Request  Resp.   Elapsed  Trans.
+Send   Recv   Size     Size    Time     Rate         
+bytes  Bytes  bytes    bytes   secs.    per sec   
+
+16384  87380  1        1       60.00    2210.55   
+16384  87380 
+</code></pre>
+
+<p>测试参数和显示与TCP_RR类似。由于业务类型的影响，速率降得比厉害。</p>
+
+<h3 id="udp-1">UDP连接请求应答模式测试</h3>
+
+<p>由于UDP协议的原因，UDP请求应答不分长短连接。只有UDP_RR一个测试项目，测试参数也类似TCP类的测试：</p>
+
+<pre><code>$ netperf -H 127.0.0.1 -l 60 -t UDP_RR              
+MIGRATED UDP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 127.0.0.1 () port 0 AF_INET : demo : first burst 0
+Local /Remote
+Socket Size   Request  Resp.   Elapsed  Trans.
+Send   Recv   Size     Size    Time     Rate         
+bytes  Bytes  bytes    bytes   secs.    per sec   
+
+212992 212992 1        1       60.00    15837.63   
+212992 212992
+</code></pre>
+
+<p>理论上，UDP的测试结果要好于TCP，但在实际网络中，可能受网络设备配置等影响，存在一定未知数。</p>
+
+<h2 id="section-5">如何进行模拟测试</h2>
+
+<p>首先需要搞好测试用例。要明确业务的类型，协议，好确定选择哪个测试项目，要了解业务的特性，如一般包的大小等信息，以便选择合适的参数。这些参数可以根据业务设计来确定，也可能需要通过业务监控数据来获取。例如通过监控数据中的最大流量和最大IO量，可以大致评估一下数据包的大小，当然这种评估很不精确。</p>
+
+<p>由于决定网络性能的因素有一部分和配置相关，因此在测试中可以变更缓冲区大小等参数，以便了解是否需要对网络参数进行调整。</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/">http://pangyi.github.io/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用calibre抓取RSS新闻制作电子书及推送到kindle]]></title>
+    <link href="http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/"/>
+    <updated>2014-12-08T20:52:45+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle</id>
+    <content type="html"><![CDATA[<p>calibre可以从RSS源抓取内容，转换成它所支持格式的电子书，还可以推送到阅读器设备。下面来看看在calibre图形界面和命令行下如何实现这些功能。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">在图形界面抓取新闻</a></li>
+  <li><a href="#section-1">自定义新闻来源</a></li>
+  <li><a href="#section-2">看看我们自定义了什么</a></li>
+  <li><a href="#section-3">命令行下生成电子杂志</a></li>
+  <li><a href="#kindle">命令行推送到Kindle</a></li>
+  <li><a href="#section-4">简单定时推送的实现</a></li>
+  <li><a href="#section-5">一些要注意的问题</a></li>
+  <li><a href="#section-6">其它方法</a></li>
+  <li><a href="#section-7">参考</a></li>
+</ul>
+
+<p>calibre可以从RSS源抓取内容，转换成它所支持格式的电子书，还可以推送到阅读器设备。下面来看看在calibre图形界面和命令行下如何实现这些功能。</p>
+
+<h2 id="section">在图形界面抓取新闻</h2>
+
+<p>打开calibre，在工具栏中选那个“抓取新闻”，会看到按语言分类的已经定义好的各类新闻源：</p>
+
+<p><img src="http://pangyi.github.io/images/getnews.png" /></p>
+
+<p>点一下“立即下载”就可以把新闻抓取为电子书了。如果设置了发送到KINDLE的邮箱配置，那么抓取完成后会自动发送邮件进行推送。</p>
+
+<p>如果你有个24小时开机的电脑，可以设置一下计划下载，进行定时推送。</p>
+
+<p>“删除指定天数前下载的新闻”，和“高级选项”页中的“最多保留份数”可以设置电子书的保存时间。当鼠标移动到此处时，就会自动显示帮助，可以自己看。需要说明的是，从我这看到的效果来说，这些选项只对Calibre自己有效。<em>对于Kindle</em>，报刊杂志类的书籍会保存14份，如果没有特意保留，那么最老的会覆盖——不过到目前为止我还没搞到那么多期呢。</p>
+
+<h2 id="section-1">自定义新闻来源</h2>
+
+<p>点击“抓取新闻”旁边的下拉按钮，选“添加自定义新闻源”，可以自己配置抓取的新闻：</p>
+
+<p><img src="http://pangyi.github.io/images/add_onwer_news.png" /></p>
+
+<p>配置方法就是找到你要抓取的新闻的rss地址，加入右下方的“将新闻加入订阅清单”的源网址处，自己起个名字，再点“添加源”。一个杂志可以加入多个源。在把所有的源加好后，修改一下“订阅清单标题”，其后<em>一定</em>要“添加/更新订阅清单”，这样才能把修改保存下来。否则一切都白费了。</p>
+
+<h2 id="section-2">看看我们自定义了什么</h2>
+
+<p>点击一下“切换到高级模式”，就能知道抓取新闻的配置是写在一个Python文件中的了。例如这个：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">class</span> <span class="nc">AdvancedUserRecipe1417937312</span><span class="p">(</span><span class="n">BasicNewsRecipe</span><span class="p">):</span>
+</span><span class="line">    <span class="n">title</span>          <span class="o">=</span> <span class="s">u&#39;</span><span class="se">\u79d1\u6280\u4e71\u5f39</span><span class="s">&#39;</span>
+</span><span class="line">    <span class="n">oldest_article</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="line">    <span class="n">max_articles_per_feed</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class="line">    <span class="n">auto_cleanup</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">feeds</span>          <span class="o">=</span> <span class="p">[(</span><span class="s">u&#39;</span><span class="se">\u79d1\u5b66\u677e\u9f20\u4f1a</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">u&#39;http://songshuhui.net/feed&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">u&#39;</span><span class="se">\u77e5\u4e4e\u6bcf\u65e5\u7cbe\u9009</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">u&#39;http://www.zhihu.com/rss&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">u&#39;</span><span class="se">\u679c\u58f3\u7f51</span><span class="s"> guokr.com&#39;</span><span class="p">,</span> <span class="s">u&#39;http://www.guokr.com/rss/&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">u&#39;</span><span class="se">\u714e\u86cb</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">u&#39;http://jandan.net/feed&#39;</span><span class="p">)]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Calibre用Python语言把配置保存为一个.recipe的文件。后面用命令行生成杂志的操作会用到这些文件。点击“显示订阅清单文件”，会打开存入自定义源的配置文件的目录。可以从这里获得.recipe文件用来在命令行下进行操作。</p>
+
+<h2 id="section-3">命令行下生成电子杂志</h2>
+
+<p>Calibre附带的命令行工具ebook-convert可以完成生成电子书的操作。比如使用：</p>
+
+<pre><code>ebook-convert 科技乱弹.recipe .mobi
+</code></pre>
+
+<p>这会生成一个同名的mobi文件，可以供kindle使用。与在Calibre中生成的电子书的差别是它的标题中包括了日期的一些信息。实际上这更便于推送到Kindle。</p>
+
+<p>.recipe文件可以自己定义，然后复制过来，或者到网上找别人做的配置文件。在尝试搞自己的自动推送功能时，发现了一些.recipe文件的来源，不过不一定适用于所有的Calibre：</p>
+
+<p>https://github.com/RichardUSTC/calibre-recipes</p>
+
+<p>https://github.com/fengli/ikindle_recipe</p>
+
+<h2 id="kindle">命令行推送到Kindle</h2>
+
+<p>Calibre也有命令行的邮件发送工具，可以用来进行推送杂志到kindle的工作：</p>
+
+<pre><code>calibre-smtp --attachment 推送的文件名.mobi --relay 邮箱的smtp服务器域名 --port smtp地址（一般是25） --username 邮箱账号 --password "邮箱密码" --encryption-method TLS 邮箱名 Kindle设备推送邮箱（类似XXX@kindle.cn） "邮件正文，内容随便" -v -s "convert"
+</code></pre>
+
+<p>-s指定邮件主题，推送到Kindle必须是convert。–attachment是指定附件，就是要推送的书了。</p>
+
+<p>也可以使用其它的工具。当然最好是命令行下能进行发送的。因为这样才能做后面的定时发送。比如我用了mutt，因为我用UBUNTU。怎么使用参考相关文档就可以了。</p>
+
+<h2 id="section-4">简单定时推送的实现</h2>
+
+<p>工具都备齐了，实现定时发送就没什么问题了。只要使用定时调度工具，定时启动命令行脚本就行了。在各类操作系统上都有定时调度工具，如Windows的计划任务，Unix/Linux的Crontab工具等。我当然是用Crontab的，附一个简单的脚本：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="c"># recipe文件路径</span>
+</span><span class="line"><span class="nv">re_path</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class="line">
+</span><span class="line"><span class="nb">cd</span> <span class="nv">$re_path</span>
+</span><span class="line"><span class="k">for</span> name in <span class="sb">`</span>ls *.recipe<span class="p">|</span>awk -F <span class="s1">&#39;.&#39;</span> <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span><span class="line"><span class="k">do</span>
+</span><span class="line">	<span class="nb">echo</span> <span class="s2">&quot;生成杂志$name&quot;</span>
+</span><span class="line">	ebook-convert <span class="k">${</span><span class="nv">name</span><span class="k">}</span>.recipe .mobi
+</span><span class="line">	sleep 3
+</span><span class="line">	<span class="nb">echo</span> <span class="s2">&quot;${name}&quot;</span><span class="p">|</span>mutt -s convert amaoxiong_k@kindle.cn -a <span class="k">${</span><span class="nv">name</span><span class="k">}</span>.mobi
+</span><span class="line"><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>抛砖引玉而而已。我把生成的.recipe文件复制到单独的目录并重新命名，这样可以用这个脚本通过设定不同的执行时间，将不同目录中的recipe在不同的时间推送到Kindle。</p>
+
+<p>目前基本功能是有了，以后有时间再搞搞密码加密解密，失败重新发送之类的。</p>
+
+<h2 id="section-5">一些要注意的问题</h2>
+
+<p>使用Kindle的推送功能，当然<em>别忘了把邮箱加入到kindle的认可列表中</em>。可以用Calibre的工具进行测试和手工推送一下。</p>
+
+<p>使用Calibre抓取推送时，发生过首次推送后之后就不成功的情况，后将Calibre中的书名改了一下，手工推送就成功能了。</p>
+
+<p>如果经常推送不成功，可以看看<em>生成的杂志是不是太大</em>。这可能造成发送邮件失败。降低电子书大小最根本的是减少抓取的内容，包括少加几个源，减少最老文章天数和每个源的最多文章数等。</p>
+
+<h2 id="section-6">其它方法</h2>
+
+<p><a href="https://github.com/cdhigh/KindleEar">KindleEar</a>是个运行在Google App Engine(GAE)上的Kindle个人推送服务器，可以自动抓取和推送RSS。由于是运行在云上的，就不用使用自己的电脑，也不用到点或一直开机了。最近不怎么翻，目前没研究。</p>
+
+<p>以前爱看豆也提供类似服务，不过最近不知道还能不能用。另外网上有些收费的类似服务可以使用，也不介绍了，各位自己去找就行。</p>
+
+<h2 id="section-7">参考</h2>
+
+<p>除了上面提到的东东，下面是成此文所参考的一些网文：</p>
+
+<p>http://zodiac1111.github.io/blog/rss2kindle-use-calibre/</p>
+
+<p>http://richardustc.github.io/blog/2013/06/calibre-recipe-howto/</p>
+
+<p>对Calibre转换电子书格式的说明，比较详细，但和本文关系不太大：http://blog.csdn.net/ccwwff/article/details/5982552</p>
+
+<p>手工制作电子书：http://www.360doc.com/content/11/0224/12/3968002_95668374.shtml</p>
+
+<p>如何向Kindle推送：http://www.amazon.cn/gp/help/customer/display.html?ie=UTF8&amp;nodeId=200767340</p>
+
+<p>IBM（看来是某粉的作品）的Calibre介绍，算是最全面的中文文档了：http://www.ibm.com/developerworks/cn/opensource/os-calibre/index.html</p>
+
+<p>另外man和Calibre官方网站上的资料是最重要的参考。</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/">http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[增加octopress的说明和目录的VIM函数和快捷键配置]]></title>
+    <link href="http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/"/>
+    <updated>2014-11-23T16:25:39+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi</id>
+    <content type="html"><![CDATA[<p>照猫画虎，写了一个函数，并加了一个快捷键，为octopress文章增加一些特定的内容，好在文章列表和首页处显示文章简介或摘要，并给文章建立目录。</p>
+
+<p>之所以把这两部分合并在一起，是因为加了目录后，目录就成了文章最前面的内容，这时目录会作为文章开头内容显示在首页，不大好看，所以这两个东东一般是要配合使用的。</p>
+
+<p>所需要增加的内容如下：</p>
+
+<pre><code>&lt;!-- more --&gt;
+
+* list element with functor item
+{:toc}
+</code></pre>
+
+<p>实现这一功能的函数放在.vimrc中，代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="vim"><span class="line">map <span class="p">&lt;</span>F7<span class="p">&gt;</span> :<span class="k">call</span> OctopressIndex<span class="p">()&lt;</span><span class="k">cr</span><span class="p">&gt;</span>&#39;<span class="k">s</span>
+</span><span class="line"><span class="k">function</span> OctopressIndex<span class="p">()</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">19</span><span class="p">,</span><span class="s2">&quot;&lt;!-- more --&gt;&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">21</span><span class="p">,</span><span class="s2">&quot;* list element with functor item&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">22</span><span class="p">,</span><span class="s2">&quot;{:toc}&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">23</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    echohl WarningMsg <span class="p">|</span> echo <span class="s2">&quot;Successful in adding the Octopress Index and read on.&quot;</span> <span class="p">|</span> echohl None
+</span><span class="line"><span class="k">endfunction</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+
+<p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/">http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Test中和 空格]]></title>

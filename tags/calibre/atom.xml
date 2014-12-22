@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: calibre | 松鼠窝]]></title>
+  <link href="http://pangyi.github.io/tags/calibre/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2014-12-22T21:16:25+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[PangYi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[用calibre抓取RSS新闻制作电子书及推送到kindle]]></title>
+    <link href="http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/"/>
+    <updated>2014-12-08T20:52:45+08:00</updated>
+    <id>http://pangyi.github.io/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle</id>
+    <content type="html"><![CDATA[<p>calibre可以从RSS源抓取内容，转换成它所支持格式的电子书，还可以推送到阅读器设备。下面来看看在calibre图形界面和命令行下如何实现这些功能。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">在图形界面抓取新闻</a></li>
+  <li><a href="#section-1">自定义新闻来源</a></li>
+  <li><a href="#section-2">看看我们自定义了什么</a></li>
+  <li><a href="#section-3">命令行下生成电子杂志</a></li>
+  <li><a href="#kindle">命令行推送到Kindle</a></li>
+  <li><a href="#section-4">简单定时推送的实现</a></li>
+  <li><a href="#section-5">一些要注意的问题</a></li>
+  <li><a href="#section-6">其它方法</a></li>
+  <li><a href="#section-7">参考</a></li>
+</ul>
+
+<p>calibre可以从RSS源抓取内容，转换成它所支持格式的电子书，还可以推送到阅读器设备。下面来看看在calibre图形界面和命令行下如何实现这些功能。</p>
+
+<h2 id="section">在图形界面抓取新闻</h2>
+
+<p>打开calibre，在工具栏中选那个“抓取新闻”，会看到按语言分类的已经定义好的各类新闻源：</p>
+
+<p><img src="/images/getnews.png"></p>
+
+<p>点一下“立即下载”就可以把新闻抓取为电子书了。如果设置了发送到KINDLE的邮箱配置，那么抓取完成后会自动发送邮件进行推送。</p>
+
+<p>如果你有个24小时开机的电脑，可以设置一下计划下载，进行定时推送。</p>
+
+<p>“删除指定天数前下载的新闻”，和“高级选项”页中的“最多保留份数”可以设置电子书的保存时间。当鼠标移动到此处时，就会自动显示帮助，可以自己看。需要说明的是，从我这看到的效果来说，这些选项只对Calibre自己有效。<em>对于Kindle</em>，报刊杂志类的书籍会保存14份，如果没有特意保留，那么最老的会覆盖——不过到目前为止我还没搞到那么多期呢。</p>
+
+<h2 id="section-1">自定义新闻来源</h2>
+
+<p>点击“抓取新闻”旁边的下拉按钮，选“添加自定义新闻源”，可以自己配置抓取的新闻：</p>
+
+<p><img src="/images/add_onwer_news.png"></p>
+
+<p>配置方法就是找到你要抓取的新闻的rss地址，加入右下方的“将新闻加入订阅清单”的源网址处，自己起个名字，再点“添加源”。一个杂志可以加入多个源。在把所有的源加好后，修改一下“订阅清单标题”，其后<em>一定</em>要“添加/更新订阅清单”，这样才能把修改保存下来。否则一切都白费了。</p>
+
+<h2 id="section-2">看看我们自定义了什么</h2>
+
+<p>点击一下“切换到高级模式”，就能知道抓取新闻的配置是写在一个Python文件中的了。例如这个：</p>
+
+<p>&#8220;`python
+class AdvancedUserRecipe1417937312(BasicNewsRecipe):
+    title          = u’\u79d1\u6280\u4e71\u5f39’
+    oldest_article = 2
+    max_articles_per_feed = 20
+    auto_cleanup = True</p>
+
+<pre><code>feeds          = [(u'\u79d1\u5b66\u677e\u9f20\u4f1a', u'http://songshuhui.net/feed'), (u'\u77e5\u4e4e\u6bcf\u65e5\u7cbe\u9009', u'http://www.zhihu.com/rss'), (u'\u679c\u58f3\u7f51 guokr.com', u'http://www.guokr.com/rss/'), (u'\u714e\u86cb', u'http://jandan.net/feed')] ```
+</code></pre>
+
+<p>Calibre用Python语言把配置保存为一个.recipe的文件。后面用命令行生成杂志的操作会用到这些文件。点击“显示订阅清单文件”，会打开存入自定义源的配置文件的目录。可以从这里获得.recipe文件用来在命令行下进行操作。</p>
+
+<h2 id="section-3">命令行下生成电子杂志</h2>
+
+<p>Calibre附带的命令行工具ebook-convert可以完成生成电子书的操作。比如使用：</p>
+
+<pre><code>ebook-convert 科技乱弹.recipe .mobi
+</code></pre>
+
+<p>这会生成一个同名的mobi文件，可以供kindle使用。与在Calibre中生成的电子书的差别是它的标题中包括了日期的一些信息。实际上这更便于推送到Kindle。</p>
+
+<p>.recipe文件可以自己定义，然后复制过来，或者到网上找别人做的配置文件。在尝试搞自己的自动推送功能时，发现了一些.recipe文件的来源，不过不一定适用于所有的Calibre：</p>
+
+<p>https://github.com/RichardUSTC/calibre-recipes</p>
+
+<p>https://github.com/fengli/ikindle_recipe</p>
+
+<h2 id="kindle">命令行推送到Kindle</h2>
+
+<p>Calibre也有命令行的邮件发送工具，可以用来进行推送杂志到kindle的工作：</p>
+
+<pre><code>calibre-smtp --attachment 推送的文件名.mobi --relay 邮箱的smtp服务器域名 --port smtp地址（一般是25） --username 邮箱账号 --password "邮箱密码" --encryption-method TLS 邮箱名 Kindle设备推送邮箱（类似XXX@kindle.cn） "邮件正文，内容随便" -v -s "convert"
+</code></pre>
+
+<p>-s指定邮件主题，推送到Kindle必须是convert。–attachment是指定附件，就是要推送的书了。</p>
+
+<p>也可以使用其它的工具。当然最好是命令行下能进行发送的。因为这样才能做后面的定时发送。比如我用了mutt，因为我用UBUNTU。怎么使用参考相关文档就可以了。</p>
+
+<h2 id="section-4">简单定时推送的实现</h2>
+
+<p>工具都备齐了，实现定时发送就没什么问题了。只要使用定时调度工具，定时启动命令行脚本就行了。在各类操作系统上都有定时调度工具，如Windows的计划任务，Unix/Linux的Crontab工具等。我当然是用Crontab的，附一个简单的脚本：</p>
+
+<p>&#8220;`sh
+# recipe文件路径
+re_path=$1</p>
+
+<p>cd $re_path
+for name in <code>ls *.recipe|awk -F '.' '{print $1}'</code>
+do
+	echo “生成杂志$name”
+	ebook-convert ${name}.recipe .mobi
+	sleep 3
+	echo “${name}”|mutt -s convert amaoxiong_k@kindle.cn -a ${name}.mobi
+done
+&#8220;`</p>
+
+<p>抛砖引玉而而已。我把生成的.recipe文件复制到单独的目录并重新命名，这样可以用这个脚本通过设定不同的执行时间，将不同目录中的recipe在不同的时间推送到Kindle。</p>
+
+<p>目前基本功能是有了，以后有时间再搞搞密码加密解密，失败重新发送之类的。</p>
+
+<h2 id="section-5">一些要注意的问题</h2>
+
+<p>使用Kindle的推送功能，当然<em>别忘了把邮箱加入到kindle的认可列表中</em>。可以用Calibre的工具进行测试和手工推送一下。</p>
+
+<p>使用Calibre抓取推送时，发生过首次推送后之后就不成功的情况，后将Calibre中的书名改了一下，手工推送就成功能了。</p>
+
+<p>如果经常推送不成功，可以看看<em>生成的杂志是不是太大</em>。这可能造成发送邮件失败。降低电子书大小最根本的是减少抓取的内容，包括少加几个源，减少最老文章天数和每个源的最多文章数等。</p>
+
+<h2 id="section-6">其它方法</h2>
+
+<p><a href="https://github.com/cdhigh/KindleEar">KindleEar</a>是个运行在Google App Engine(GAE)上的Kindle个人推送服务器，可以自动抓取和推送RSS。由于是运行在云上的，就不用使用自己的电脑，也不用到点或一直开机了。最近不怎么翻，目前没研究。</p>
+
+<p>以前爱看豆也提供类似服务，不过最近不知道还能不能用。另外网上有些收费的类似服务可以使用，也不介绍了，各位自己去找就行。</p>
+
+<h2 id="section-7">参考</h2>
+
+<p>除了上面提到的东东，下面是成此文所参考的一些网文：</p>
+
+<p>http://zodiac1111.github.io/blog/rss2kindle-use-calibre/</p>
+
+<p>http://richardustc.github.io/blog/2013/06/calibre-recipe-howto/</p>
+
+<p>对Calibre转换电子书格式的说明，比较详细，但和本文关系不太大：http://blog.csdn.net/ccwwff/article/details/5982552</p>
+
+<p>手工制作电子书：http://www.360doc.com/content/11/0224/12/3968002_95668374.shtml</p>
+
+<p>如何向Kindle推送：http://www.amazon.cn/gp/help/customer/display.html?ie=UTF8&amp;nodeId=200767340</p>
+
+<p>IBM（看来是某粉的作品）的Calibre介绍，算是最全面的中文文档了：http://www.ibm.com/developerworks/cn/opensource/os-calibre/index.html</p>
+
+<p>另外man和Calibre官方网站上的资料是最重要的参考。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
