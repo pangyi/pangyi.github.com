@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | 松鼠窝]]></title>
   <link href="http://pangyi.github.io/tags/octopress/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-12-22T21:16:25+08:00</updated>
+  <updated>2015-01-02T23:05:41+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[设置octopress首页的日期格式]]></title>
+    <link href="http://pangyi.github.io/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/"/>
+    <updated>2015-01-02T19:49:30+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi</id>
+    <content type="html"><![CDATA[<p>通过_config.yml中的date_format参数设置对我目前使用的2.0版本的octopress的首页中的文章日期的显示不起作用，需要用其它方式进行设置。</p>
+
+<!--more-->
+
+<p>设置方式为，修改source/_includes/post/date.html文件，将其中的替换为（请自觉去掉“\”，因为octopress处理大括号的问题，不加就不能显示，加了又不对，下同）:</p>
+
+<pre><code>\{\{ page.date | date: '%Y年%m月%d日' }}
+</code></pre>
+
+<p>单引号中的内容是Jekyll（也是octopress）的日期格式，在<a href="http://alanwsmith.com/jekyll-liquid-date-formatting-examples">此处</a>可以找到相关的例子。比如：</p>
+
+<pre><code>\{\{ page.date | date: '%B %d, %Y' }}
+</code></pre>
+
+<p>会让日期显示为：</p>
+
+<pre><code>
+</code></pre>
+
+<p>可参考这个<a href="http://alanwsmith.com/jekyll-liquid-date-formatting-examples">Jekyll Date Formatting Examples</a>以及一个<a href="http://stackoverflow.com/questions/26458533/octopresss-date-format-not-working">我等了几个月的问题的回复</a>，这个回复中的第二个回复是正解。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[增加octopress的说明和目录的VIM函数和快捷键配置]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 测试 | 松鼠窝]]></title>
   <link href="http://pangyi.github.io/tags/ce-shi/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2014-12-22T21:16:25+08:00</updated>
+  <updated>2015-01-02T23:05:41+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -21,6 +21,8 @@
     <content type="html"><![CDATA[<p>一般我们进行网络测试，主要是测试网络的连通性、网络带宽、网络响应时间等。常用的工具包括ping、traceroute、telnet、ftp等。如测试网络连通性，可以使用ping，traceroute，如果测试防火墙是否配置正确，可以使用telnet和traceroute -p，使用ping命令可以测试网络延迟，ftp则用来测试网络带宽。</p>
 
 <p>但如果需要做一些更为深入的测试，如测试不同包大小的不同类型的业务的网络处理能力，则需要更专业的工具，如netperf，iperf等。</p>
+
+<!--more-->
 
 <h2 id="netperf">netperf测试工具介绍</h2>
 
