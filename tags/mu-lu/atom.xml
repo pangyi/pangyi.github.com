@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 目录 | 松鼠窝]]></title>
   <link href="http://pangyi.github.io/tags/mu-lu/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2015-01-02T23:05:41+08:00</updated>
+  <updated>2015-01-18T17:28:50+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -45,7 +45,7 @@ function OctopressIndex()
 <pre><code>echohl WarningMsg | echo "Successful in adding the Octopress Index and read on." | echohl None endfunction ```
 </code></pre>
 
-<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+<p>功能就是从19行起，插入要增加的内容。快捷键是F7</p>
 
 <p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
 

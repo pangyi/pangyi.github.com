@@ -4,7 +4,7 @@
   <title><![CDATA[松鼠窝]]></title>
   <link href="http://pangyi.github.io/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2015-01-02T23:05:41+08:00</updated>
+  <updated>2015-01-18T17:28:50+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -12,6 +12,442 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[配置nginx支持PHP]]></title>
+    <link href="http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/"/>
+    <updated>2015-01-18T16:06:07+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php</id>
+    <content type="html"><![CDATA[<p>nginx本身不支持php。如果需要使用php，需要安装php解析服务，如php-fpm，或spawn-fcgi等。从在Ubuntu上配置的便捷性考虑，这次使用php-fpm实现。</p>
+
+<!-- more -->
+
+<h2 id="phpphp-fpm">安装php和php-fpm</h2>
+
+<p>安装方法，略……</p>
+
+<p>因为可以直接用包管理器安装。</p>
+
+<p>安装后需要启动服务。</p>
+
+<h2 id="nginx">修改nginx配置文件</h2>
+
+<p>修改配置文件/etc/nginx/sites-available/default，首先让让默认页面里有php文件：</p>
+
+<pre><code>index index.php index.html index.htm;
+</code></pre>
+
+<p>接着开启php支持，找到“location ~ .php”部分，将其中的注释进行修改：</p>
+
+<pre><code>location ~ \.php$ {
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+	# With php5-cgi alone:
+#	fastcgi_pass 127.0.0.1:9000;
+	# With php5-fpm:
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
+	fastcgi_index index.php;
+	include fastcgi_params;
+}
+</code></pre>
+
+<p>“fastcgi_pass 127.0.0.1:9000;”与spawn-fcgi有关，故要注释。修改配置文件后需要重启nginx服务。</p>
+
+<h2 id="section">原理</h2>
+
+<p>按网上的说法：“nginx本身不能处理PHP，它只是个web服务器，当接收到请求后，如果是php请求，则发给php解释器处理，并把结果返回给客户端。nginx一般是把请求发fastcgi管理进程处理，fascgi管理进程选择cgi子进程处理结果并返回被nginx”。也就是说，nginx将处理请求交给php5-fpm，再接收处理返回结果。</p>
+
+<h2 id="section-1">参考</h2>
+
+<p>http://www.nginx.cn/231.html</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/">http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VIM窗口操作]]></title>
+    <link href="http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/"/>
+    <updated>2015-01-18T13:06:07+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo</id>
+    <content type="html"><![CDATA[<h2 id="section">开窗</h2>
+
+<h3 id="section-1">横向切割（水平排列）窗口</h3>
+
+<p>:new+窗口名(保存后就是文件名)	窗口名可选</p>
+
+<p>:split+窗口名，也可以简写为:sp+窗口名	当前文件分别显示到了两个窗口，内容完全相同，并保持同步。</p>
+
+<h3 id="section-2">纵向切割（垂直排列）窗口</h3>
+
+<p>:vsplit+窗口名，也可以简写为：vsp+窗口名</p>
+
+<h2 id="section-3">切窗</h2>
+
+<p>Ctrl-w w	向后切换窗口，窗口操作都使用Ctrl-w开头。</p>
+
+<p>Ctrl-w p	切换回上一个窗口，注意不是与w对应的操作。</p>
+
+<p>Ctrl-w h	切换到左边窗口，如果有的话，下同</p>
+
+<p>Ctrl-w l	切换到右边窗口</p>
+
+<p>Ctrl-w j	切换到下面窗口</p>
+
+<p>ctrl-w k	切换到上面窗口，这4个操作与光标操作的键位对应。</p>
+
+<h2 id="section-4">其它</h2>
+
+<p>Ctrl-w +	扩大窗口，如果还可以的话，因为是平均扩大，不会同时缩小其它窗口</p>
+
+<p>Ctrl-w -	缩小窗口，窗口大小减一行。</p>
+
+<p>Ctrl-w行数+	扩大窗口指定的行数。注意与Ctrl-w +不同，此命令只扩大当前窗口。</p>
+
+<p>Ctrl-w行数-	缩小窗口指定的行数。</p>
+
+<h2 id="section-5">参考文章</h2>
+
+<p>http://blog.csdn.net/jeffry_cheng/article/details/6167378</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/">http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[同步octopress文章到支持MetaWeblog的博客]]></title>
+    <link href="http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/"/>
+    <updated>2015-01-03T14:41:25+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke</id>
+    <content type="html"><![CDATA[<p>同步octopress文章到支持MetaWeblog的博客需要用到<a href="https://github.com/huangbowen521/octopress-syncPost">一个插件</a>。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">获得插件</a></li>
+  <li><a href="#section-1">修改插件</a></li>
+  <li><a href="#section-2">配置配置文件</a></li>
+  <li><a href="#section-3">安装相关的组件</a></li>
+  <li><a href="#section-4">同步博文</a></li>
+  <li><a href="#section-5">其它参考：</a></li>
+</ul>
+
+<h2 id="section">获得插件</h2>
+
+<p>从github上获得插件中plugins中的5个ruby文件，分别实现同步全部博客，同步最后一篇博客，同步指定时间之后的博客，同步指定标题的博客等（有一个公共调用文件）。对这些文件要单独建一个目录存放，比如在octopress的根目录下建一个syncmeta目录。然后将插件放入此目录。</p>
+
+<p>这样做是因为目前版本的octopress中的rake generate操作（实际执行的是jekyll build）时，会把plugins中的所有ruby文件执行一遍，这样做一次rake generate操作，就会做一次同步全部博客，同步最后一篇博客……</p>
+
+<h2 id="section-1">修改插件</h2>
+
+<p>在所有插件中找到：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">require</span> <span class="s1">&#39;./plugins/sync_post.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>改为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">require</span> <span class="s1">&#39;./syncmeta/sync_post.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-2">配置配置文件</h2>
+
+<p>Rakefile的配置完全按github上的说明，_config.yml中的MetaWeblog_url一项，需要使用最新的博客离线编辑的插件URL，如cnblog上我的博客的url就是http://rpc.cnblogs.com/metaweblog/maoxiong ，而不是插件说明中的那样。</p>
+
+<h2 id="section-3">安装相关的组件</h2>
+
+<p>在Gemfile中加入：</p>
+
+<pre><code>gem 'metaweblog', '~&gt; 0.1.0'
+gem 'nokogiri', '~&gt; 1.5.9'
+</code></pre>
+
+<p>然后执行bundle install进行安装。</p>
+
+<p>安装中会报一些与库文件相关的错误，可以安装相关库文件：</p>
+
+<pre><code>sudo apt-get install libxml2-dev libxslt-dev
+</code></pre>
+
+<h2 id="section-4">同步博文</h2>
+
+<ul>
+  <li>同步最后一篇博文：rake sync_latest_post[“PASSWD”]</li>
+</ul>
+
+<p>命令中只能输入一个密码，如果有多个博客要同步，要把它们的密码设置成一样的，下同。</p>
+
+<p>在命令中输入密码时，密码最好不要有通常用于转义用的特殊字符，否则可能有问题。</p>
+
+<p>如果不输入密码，则会在执行过程中要求输入每个博客的密码。此时密码中的特殊字符不影响使用。</p>
+
+<ul>
+  <li>
+    <p>同步全部博文：sync_all_posts[“PASSWD”]</p>
+  </li>
+  <li>
+    <p>同步某一时间之后的博文：rake sync_posts_after_date[“date”,”PASSWD”]</p>
+  </li>
+</ul>
+
+<p>date类似于”2013-01-01” 、 “2013/01/01” 、 “Jan 1 2013”。如果更改了Octopress生成Blog的目录结构，会报类似“sync_post.rb: 权限不够”之类的错误。实际原因是插件中查找目录的部分使用的代码是按默认的目录结构设计的。这部分代码在sync_post.rb的第51行：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="n">postDate</span> <span class="o">=</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path</span><span class="o">[</span><span class="sr">/\d{4}\/\d{2}\/\d{2}/</span><span class="o">]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>需要对它进行修改以适应定制后的目录结构。</p>
+
+<p>不清楚是不是与改过目录结构有关，按时间同步的速度非常慢。</p>
+
+<ul>
+  <li>同步指定标题的博文：rake sync_post_by_title[“title”,”PASSWD”]</li>
+</ul>
+
+<p>此处的title是博客标题，不是文件名。中文的标题在Octopress中会被替换成拼音。空格也会被替换成“-”。所以博客标题和文件名并不对应。</p>
+
+<h2 id="section-5">其它参考：</h2>
+
+<p>解决安装gem中的报错，并从中获得了修改日期目录结构的灵感：</p>
+
+<p>http://fzyz999.github.io/blog/2013/05/06/ru-he-shi-yong-octopresscha-jian-tong-bu-bo-wen-dao-oschinashang/</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GPG加密解密与实际应用]]></title>
+    <link href="http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/"/>
+    <updated>2015-01-03T11:27:13+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong</id>
+    <content type="html"><![CDATA[<p>主要内容：GPG加密解密的基本操作与少量应用。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">简介</a></li>
+  <li><a href="#section-1">安装</a></li>
+  <li><a href="#section-2">生成密钥操作过程</a></li>
+  <li><a href="#section-3">对密钥的一些操作</a>    <ul>
+      <li><a href="#section-4">查看密钥</a></li>
+      <li><a href="#section-5">导出密钥</a></li>
+      <li><a href="#section-6">导入密钥</a></li>
+      <li><a href="#section-7">注销密钥</a></li>
+      <li><a href="#section-8">删除密钥</a></li>
+      <li><a href="#section-9">编辑密钥</a>        <ul>
+          <li><a href="#section-10">签名</a></li>
+          <li><a href="#section-11">修改密码</a></li>
+          <li><a href="#section-12">等……</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#section-13">加密文件</a></li>
+  <li><a href="#section-14">解密文件</a></li>
+  <li><a href="#section-15">一些参考</a></li>
+</ul>
+
+<h2 id="section">简介</h2>
+
+<p>GPG——GnuPG，是一种非对称密钥加密工具软件，主要用于加密解密，进行数字签名等。GPG可以生成用于加密解密、进行数字签名、数据指纹的非对称密钥。</p>
+
+<h2 id="section-1">安装</h2>
+
+<p>目前UBUNTU默认已经安装了GPG，编译安装可参考<a href="https://www.gnupg.org/howtos/zh/GPGMiniHowto-2.html#ss2.1">中文版Howto中的安装一节</a>。注意国际版和美国版的区别。</p>
+
+<h2 id="section-2">生成密钥操作过程</h2>
+
+<p>生成密钥的命令是gpg –gen-key，下面是一个gpg –gen-key执行的过程，会夹杂说明文字，并跳过一部分不重要的提示信息，来说明密钥生成的过程：</p>
+
+<pre><code>gpg --gen-key
+……
+请选择您要使用的密钥种类：
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (仅用于签名)
+   (4) RSA (仅用于签名)
+您的选择？ 
+</code></pre>
+
+<p>可以选择不同的加密算法，以及用途。以前默认使用的是DSA算法，目前变成了RSA。这次选择默认。</p>
+
+<pre><code>RSA 密钥长度应在 1024 位与 4096 位之间。
+您想要用多大的密钥尺寸？(2048) 
+</code></pre>
+
+<p>密钥长度/尺寸越长，越不易破解，但也需要更多的处理过程，因而可能处理的更慢。此处默认值是2048。此值已经与HOWTO中不太一样了，更长了，DSA密钥的长度范围也变成了1024-3072之间。这是个“泄露年龄的问题”。</p>
+
+<pre><code>请设定这把密钥的有效期限。
+	 0 = 密钥永不过期
+      &lt;n&gt;  = 密钥在 n 天后过期
+      &lt;n&gt;w = 密钥在 n 周后过期
+      &lt;n&gt;m = 密钥在 n 月后过期
+      &lt;n&gt;y = 密钥在 n 年后过期
+……
+</code></pre>
+
+<p>密钥有效期，不用解释。</p>
+
+<pre><code>您需要一个用户标识来辨识您的密钥；本软件会用真实姓名、注释和电子邮件地址组合
+成用户标识，如下所示：
+    “Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;”
+
+真实姓名： xxx
+电子邮件地址： xxx@sina.com
+</code></pre>
+
+<p>这个标识会作为以后维护密钥的标志，如查询，导入导出，销毁等操作，将以此为UID进行检索确认对只个密钥进行操作。</p>
+
+<pre><code>您需要一个密码来保护您的私钥。
+</code></pre>
+
+<p>输入一个密码，这样在使用密钥时，会要求输入密码，正确后才能使用密钥，这是第二重保护。
+可以不输入密码，以用于一些特殊用途，不过一般情况下，还是有它比较好，只是必须记好，别忘了。</p>
+
+<pre><code>我们需要生成大量的随机字节。这个时候您可以多做些琐事(像是敲打键盘、移动
+鼠标、读写硬盘之类的)，这会让随机数字发生器有更好的机会获得足够的熵数。
+
+随机字节不够多。请再做一些其他的琐事，以使操作系统能搜集到更多的熵！
+(还需要177字节)
+....+++++
+
+随机字节不够多。请再做一些其他的琐事，以使操作系统能搜集到更多的熵！
+(还需要155字节)
+....................+++++
+</code></pre>
+
+<p>这时系统开始生成密钥，这期间需要有足够的操作以在内存中生成随机数。所以，去干点别的，直到密钥生成完毕，但不要离开喝茶。</p>
+
+<pre><code>gpg: 密钥 375B9788 被标记为绝对信任
+公钥和私钥已经生成并经签名。
+……
+sub   4096R/107FE36C 2014-12-13
+</code></pre>
+
+<p>至此密钥生成完成。</p>
+
+<h2 id="section-3">对密钥的一些操作</h2>
+
+<h3 id="section-4">查看密钥</h3>
+
+<pre><code>$ gpg --list-keys
+/home/pangyi/.gnupg/pubring.gpg
+-------------------------------
+pub   4096R/375B9788 2014-12-13
+uid                  xxx (xxxxx) &lt;xxx@sina.com&gt;
+sub   4096R/107FE36C 2014-12-13
+
+pub   3072D/9D4F5F01 2014-12-14
+uid                  uidfile (xxx) &lt;xxx@sina.com&gt;
+sub   3072g/6D72E230 2014-12-14
+</code></pre>
+
+<p>可以看到密钥的UID。</p>
+
+<p>查看密钥签名信息使用gpg –list-sigs，查看密钥指纹信息使用gpg –fingerprint</p>
+
+<p>查看私钥信息：</p>
+
+<pre><code>gpg --list-secret-keys
+/home/pangyi/.gnupg/secring.gpg
+-------------------------------
+sec   4096R/375B9788 2014-12-13
+uid                  xxx (xxxxx) &lt;xxx@sina.com&gt;
+ssb   4096R/107FE36C 2014-12-13
+
+sec   3072D/9D4F5F01 2014-12-14
+uid                  uidfile (xxx) &lt;xxx@sina.com&gt;
+ssb   3072g/6D72E230 2014-12-14
+</code></pre>
+
+<h3 id="section-5">导出密钥</h3>
+
+<p>gpg –export 用于导出密钥公钥。当有多个密钥时，需要指定UID或sec处的标识，输入的UID不必完整，能唯一标识就能输出密钥。但用UID有可能会同时输出多个密钥来，不如使用sec好。</p>
+
+<p>密钥会输出到标准输出，可以重定向到文件保存。</p>
+
+<h3 id="section-6">导入密钥</h3>
+
+<p>未测试，使用gpg –import [Filename]导入公钥，如果不指定文件则从标准输入导入。</p>
+
+<h3 id="section-7">注销密钥</h3>
+
+<p>未测试，使用gpg –gen-revoke注销，需要用到密钥密码</p>
+
+<h3 id="section-8">删除密钥</h3>
+
+<p>未测试，gpg –delete-key</p>
+
+<h3 id="section-9">编辑密钥</h3>
+
+<p>gpg –edit-key是编辑密钥的指令，它能：</p>
+
+<h4 id="section-10">签名</h4>
+
+<p>没有导入的密钥，无法测试，本地生成的已经签过：gpg –edit-key UID sign</p>
+
+<h4 id="section-11">修改密码</h4>
+
+<p>未测试，gpg –edit-key UID passwd</p>
+
+<h4 id="section-12">等……</h4>
+
+<h2 id="section-13">加密文件</h2>
+
+<p>加密一个文件，使用“gpg -e -r UID 文件名”来完成。加密后会生成一个原文件名.gpg的文件。</p>
+
+<h2 id="section-14">解密文件</h2>
+
+<p>解密文件的操作如下：</p>
+
+<pre><code>$ gpg -d -r uidfile test.gpg
+gpg: 由 3072 位的 ELG-E 密钥加密，钥匙号为 6D72E230、生成于 2014-12-14
+      “uidfile (xxx) &lt;xxx@sina.com&gt;”
+test
+</code></pre>
+
+<p>除前两行显示外的内容是GPG显示到标准输出的内容。它是解密后文件的内容。可以将它重定向生成文件获取解密的文件。可以看到，加密前文件的内容是test。</p>
+
+<p>不知道是不是因为输出内容中有到非标准输出的内容，虽然进程的返回结果是0，但在expect这类脚本语言中会出现报错，无法正常执行。</p>
+
+<p>如果密钥生成时设置了密码，在解密时会提示输入，如果输入不正解是无法解密的。</p>
+
+<p>在UBUNTU环境中，如果输入过一次密码，那么之后都不用再输入，直到系统重新启动。</p>
+
+<h2 id="section-15">一些参考</h2>
+
+<p>由于应用更新等原因，网络上的信息需要“领会精神”，要看最准确的参考文档，还是要看最新的官方文档或man帮助。以下是一些中文的参考文章：</p>
+
+<p>http://www.linuxfly.org/post/274/</p>
+
+<p>https://www.gnupg.org/howtos/zh/GPGMiniHowto-1.html
+&lt;p class=&#8217;post-footer&#8217;&gt;
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+ posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+&lt;/p&gt;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[设置octopress首页的日期格式]]></title>
@@ -576,7 +1012,7 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 </span><span class="line"><span class="k">endfunction</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+<p>功能就是从19行起，插入要增加的内容。快捷键是F7</p>
 
 <p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
 

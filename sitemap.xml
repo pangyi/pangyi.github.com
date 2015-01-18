@@ -3,6 +3,38 @@
   
   
   <url>
+    <loc>http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/</loc>
+    
+    <lastmod>2015-01-18T16:06:07+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/</loc>
+    
+    <lastmod>2015-01-18T13:06:07+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/</loc>
+    
+    <lastmod>2015-01-03T14:41:25+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/</loc>
+    
+    <lastmod>2015-01-03T11:27:13+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://pangyi.github.io/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/</loc>
     
     <lastmod>2015-01-02T19:49:30+08:00</lastmod>
@@ -133,28 +165,28 @@
   
   <url>
     <loc>http://pangyi.github.io/blog/archives/</loc>
-    <lastmod>2015-01-02T23:05:41+08:00</lastmod>
+    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/</loc>
-    <lastmod>2015-01-02T23:05:41+08:00</lastmod>
+    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/</loc>
-    <lastmod>2015-01-02T23:05:41+08:00</lastmod>
+    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/test.html</loc>
-    <lastmod>2015-01-02T23:05:41+08:00</lastmod>
+    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 插件 | 松鼠窝]]></title>
+  <link href="http://pangyi.github.io/tags/cha-jian/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2015-01-18T17:28:50+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[PangYi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[同步octopress文章到支持MetaWeblog的博客]]></title>
+    <link href="http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/"/>
+    <updated>2015-01-03T14:41:25+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke</id>
+    <content type="html"><![CDATA[<p>同步octopress文章到支持MetaWeblog的博客需要用到<a href="https://github.com/huangbowen521/octopress-syncPost">一个插件</a>。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">获得插件</a></li>
+  <li><a href="#section-1">修改插件</a></li>
+  <li><a href="#section-2">配置配置文件</a></li>
+  <li><a href="#section-3">安装相关的组件</a></li>
+  <li><a href="#section-4">同步博文</a></li>
+  <li><a href="#section-5">其它参考：</a></li>
+</ul>
+
+<h2 id="section">获得插件</h2>
+
+<p>从github上获得插件中plugins中的5个ruby文件，分别实现同步全部博客，同步最后一篇博客，同步指定时间之后的博客，同步指定标题的博客等（有一个公共调用文件）。对这些文件要单独建一个目录存放，比如在octopress的根目录下建一个syncmeta目录。然后将插件放入此目录。</p>
+
+<p>这样做是因为目前版本的octopress中的rake generate操作（实际执行的是jekyll build）时，会把plugins中的所有ruby文件执行一遍，这样做一次rake generate操作，就会做一次同步全部博客，同步最后一篇博客……</p>
+
+<h2 id="section-1">修改插件</h2>
+
+<p>在所有插件中找到：</p>
+
+<p><code>ruby
+require './plugins/sync_post.rb'
+</code></p>
+
+<p>改为：</p>
+
+<p><code>ruby
+require './syncmeta/sync_post.rb'
+</code></p>
+
+<h2 id="section-2">配置配置文件</h2>
+
+<p>Rakefile的配置完全按github上的说明，_config.yml中的MetaWeblog_url一项，需要使用最新的博客离线编辑的插件URL，如cnblog上我的博客的url就是http://rpc.cnblogs.com/metaweblog/maoxiong ，而不是插件说明中的那样。</p>
+
+<h2 id="section-3">安装相关的组件</h2>
+
+<p>在Gemfile中加入：</p>
+
+<pre><code>gem 'metaweblog', '~&gt; 0.1.0'
+gem 'nokogiri', '~&gt; 1.5.9'
+</code></pre>
+
+<p>然后执行bundle install进行安装。</p>
+
+<p>安装中会报一些与库文件相关的错误，可以安装相关库文件：</p>
+
+<pre><code>sudo apt-get install libxml2-dev libxslt-dev
+</code></pre>
+
+<h2 id="section-4">同步博文</h2>
+
+<ul>
+  <li>同步最后一篇博文：rake sync_latest_post[“PASSWD”]</li>
+</ul>
+
+<p>命令中只能输入一个密码，如果有多个博客要同步，要把它们的密码设置成一样的，下同。</p>
+
+<p>在命令中输入密码时，密码最好不要有通常用于转义用的特殊字符，否则可能有问题。</p>
+
+<p>如果不输入密码，则会在执行过程中要求输入每个博客的密码。此时密码中的特殊字符不影响使用。</p>
+
+<ul>
+  <li>
+    <p>同步全部博文：sync_all_posts[“PASSWD”]</p>
+  </li>
+  <li>
+    <p>同步某一时间之后的博文：rake sync_posts_after_date[“date”,”PASSWD”]</p>
+  </li>
+</ul>
+
+<p>date类似于”2013-01-01” 、 “2013/01/01” 、 “Jan 1 2013”。如果更改了Octopress生成Blog的目录结构，会报类似“sync_post.rb: 权限不够”之类的错误。实际原因是插件中查找目录的部分使用的代码是按默认的目录结构设计的。这部分代码在sync_post.rb的第51行：</p>
+
+<p><code>ruby
+postDate = Date.parse(path[/\d{4}\/\d{2}\/\d{2}/])
+</code></p>
+
+<p>需要对它进行修改以适应定制后的目录结构。</p>
+
+<p>不清楚是不是与改过目录结构有关，按时间同步的速度非常慢。</p>
+
+<ul>
+  <li>同步指定标题的博文：rake sync_post_by_title[“title”,”PASSWD”]</li>
+</ul>
+
+<p>此处的title是博客标题，不是文件名。中文的标题在Octopress中会被替换成拼音。空格也会被替换成“-”。所以博客标题和文件名并不对应。</p>
+
+<h2 id="section-5">其它参考：</h2>
+
+<p>解决安装gem中的报错，并从中获得了修改日期目录结构的灵感：</p>
+
+<p>http://fzyz999.github.io/blog/2013/05/06/ru-he-shi-yong-octopresscha-jian-tong-bu-bo-wen-dao-oschinashang/</p>
+
+]]></content>
+  </entry>
+  
+</feed>

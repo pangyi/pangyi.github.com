@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GPG加密解密与实际应用 - 松鼠窝</title>
+  <meta name="author" content="PangYi">
+
+  
+  <meta name="description" content="主要内容：GPG加密解密的基本操作与少量应用。 简介 安装 生成密钥操作过程 对密钥的一些操作 查看密钥 导出密钥 导入密钥 注销密钥 删除密钥 编辑密钥 签名 修改密码 等…… 加密文件 解密文件 一些参考 简介 GPG——GnuPG，是一种非对称密钥加密工具软件，主要用于加密解密， &hellip;">
+  <meta name="keywords" content="GPG加密解密基础，与实际应用">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="松鼠窝" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Font Awesome icons-->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+ <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">松鼠窝</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pangyi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/"><i class="fa fa-home"></i> 博客首页</a></li>
+	<li><a href="/blog/archives"><i class="fa fa-list"></i> 文章列表</a></li>
+  </ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">GPG加密解密与实际应用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月03日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>主要内容：GPG加密解密的基本操作与少量应用。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">简介</a></li>
+  <li><a href="#section-1">安装</a></li>
+  <li><a href="#section-2">生成密钥操作过程</a></li>
+  <li><a href="#section-3">对密钥的一些操作</a>    <ul>
+      <li><a href="#section-4">查看密钥</a></li>
+      <li><a href="#section-5">导出密钥</a></li>
+      <li><a href="#section-6">导入密钥</a></li>
+      <li><a href="#section-7">注销密钥</a></li>
+      <li><a href="#section-8">删除密钥</a></li>
+      <li><a href="#section-9">编辑密钥</a>        <ul>
+          <li><a href="#section-10">签名</a></li>
+          <li><a href="#section-11">修改密码</a></li>
+          <li><a href="#section-12">等……</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#section-13">加密文件</a></li>
+  <li><a href="#section-14">解密文件</a></li>
+  <li><a href="#section-15">一些参考</a></li>
+</ul>
+
+<h2 id="section">简介</h2>
+
+<p>GPG——GnuPG，是一种非对称密钥加密工具软件，主要用于加密解密，进行数字签名等。GPG可以生成用于加密解密、进行数字签名、数据指纹的非对称密钥。</p>
+
+<h2 id="section-1">安装</h2>
+
+<p>目前UBUNTU默认已经安装了GPG，编译安装可参考<a href="https://www.gnupg.org/howtos/zh/GPGMiniHowto-2.html#ss2.1">中文版Howto中的安装一节</a>。注意国际版和美国版的区别。</p>
+
+<h2 id="section-2">生成密钥操作过程</h2>
+
+<p>生成密钥的命令是gpg –gen-key，下面是一个gpg –gen-key执行的过程，会夹杂说明文字，并跳过一部分不重要的提示信息，来说明密钥生成的过程：</p>
+
+<pre><code>gpg --gen-key
+……
+请选择您要使用的密钥种类：
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (仅用于签名)
+   (4) RSA (仅用于签名)
+您的选择？ 
+</code></pre>
+
+<p>可以选择不同的加密算法，以及用途。以前默认使用的是DSA算法，目前变成了RSA。这次选择默认。</p>
+
+<pre><code>RSA 密钥长度应在 1024 位与 4096 位之间。
+您想要用多大的密钥尺寸？(2048) 
+</code></pre>
+
+<p>密钥长度/尺寸越长，越不易破解，但也需要更多的处理过程，因而可能处理的更慢。此处默认值是2048。此值已经与HOWTO中不太一样了，更长了，DSA密钥的长度范围也变成了1024-3072之间。这是个“泄露年龄的问题”。</p>
+
+<pre><code>请设定这把密钥的有效期限。
+	 0 = 密钥永不过期
+      &lt;n&gt;  = 密钥在 n 天后过期
+      &lt;n&gt;w = 密钥在 n 周后过期
+      &lt;n&gt;m = 密钥在 n 月后过期
+      &lt;n&gt;y = 密钥在 n 年后过期
+……
+</code></pre>
+
+<p>密钥有效期，不用解释。</p>
+
+<pre><code>您需要一个用户标识来辨识您的密钥；本软件会用真实姓名、注释和电子邮件地址组合
+成用户标识，如下所示：
+    “Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;”
+
+真实姓名： xxx
+电子邮件地址： xxx@sina.com
+</code></pre>
+
+<p>这个标识会作为以后维护密钥的标志，如查询，导入导出，销毁等操作，将以此为UID进行检索确认对只个密钥进行操作。</p>
+
+<pre><code>您需要一个密码来保护您的私钥。
+</code></pre>
+
+<p>输入一个密码，这样在使用密钥时，会要求输入密码，正确后才能使用密钥，这是第二重保护。
+可以不输入密码，以用于一些特殊用途，不过一般情况下，还是有它比较好，只是必须记好，别忘了。</p>
+
+<pre><code>我们需要生成大量的随机字节。这个时候您可以多做些琐事(像是敲打键盘、移动
+鼠标、读写硬盘之类的)，这会让随机数字发生器有更好的机会获得足够的熵数。
+
+随机字节不够多。请再做一些其他的琐事，以使操作系统能搜集到更多的熵！
+(还需要177字节)
+....+++++
+
+随机字节不够多。请再做一些其他的琐事，以使操作系统能搜集到更多的熵！
+(还需要155字节)
+....................+++++
+</code></pre>
+
+<p>这时系统开始生成密钥，这期间需要有足够的操作以在内存中生成随机数。所以，去干点别的，直到密钥生成完毕，但不要离开喝茶。</p>
+
+<pre><code>gpg: 密钥 375B9788 被标记为绝对信任
+公钥和私钥已经生成并经签名。
+……
+sub   4096R/107FE36C 2014-12-13
+</code></pre>
+
+<p>至此密钥生成完成。</p>
+
+<h2 id="section-3">对密钥的一些操作</h2>
+
+<h3 id="section-4">查看密钥</h3>
+
+<pre><code>$ gpg --list-keys
+/home/pangyi/.gnupg/pubring.gpg
+-------------------------------
+pub   4096R/375B9788 2014-12-13
+uid                  xxx (xxxxx) &lt;xxx@sina.com&gt;
+sub   4096R/107FE36C 2014-12-13
+
+pub   3072D/9D4F5F01 2014-12-14
+uid                  uidfile (xxx) &lt;xxx@sina.com&gt;
+sub   3072g/6D72E230 2014-12-14
+</code></pre>
+
+<p>可以看到密钥的UID。</p>
+
+<p>查看密钥签名信息使用gpg –list-sigs，查看密钥指纹信息使用gpg –fingerprint</p>
+
+<p>查看私钥信息：</p>
+
+<pre><code>gpg --list-secret-keys
+/home/pangyi/.gnupg/secring.gpg
+-------------------------------
+sec   4096R/375B9788 2014-12-13
+uid                  xxx (xxxxx) &lt;xxx@sina.com&gt;
+ssb   4096R/107FE36C 2014-12-13
+
+sec   3072D/9D4F5F01 2014-12-14
+uid                  uidfile (xxx) &lt;xxx@sina.com&gt;
+ssb   3072g/6D72E230 2014-12-14
+</code></pre>
+
+<h3 id="section-5">导出密钥</h3>
+
+<p>gpg –export 用于导出密钥公钥。当有多个密钥时，需要指定UID或sec处的标识，输入的UID不必完整，能唯一标识就能输出密钥。但用UID有可能会同时输出多个密钥来，不如使用sec好。</p>
+
+<p>密钥会输出到标准输出，可以重定向到文件保存。</p>
+
+<h3 id="section-6">导入密钥</h3>
+
+<p>未测试，使用gpg –import [Filename]导入公钥，如果不指定文件则从标准输入导入。</p>
+
+<h3 id="section-7">注销密钥</h3>
+
+<p>未测试，使用gpg –gen-revoke注销，需要用到密钥密码</p>
+
+<h3 id="section-8">删除密钥</h3>
+
+<p>未测试，gpg –delete-key</p>
+
+<h3 id="section-9">编辑密钥</h3>
+
+<p>gpg –edit-key是编辑密钥的指令，它能：</p>
+
+<h4 id="section-10">签名</h4>
+
+<p>没有导入的密钥，无法测试，本地生成的已经签过：gpg –edit-key UID sign</p>
+
+<h4 id="section-11">修改密码</h4>
+
+<p>未测试，gpg –edit-key UID passwd</p>
+
+<h4 id="section-12">等……</h4>
+
+<h2 id="section-13">加密文件</h2>
+
+<p>加密一个文件，使用“gpg -e -r UID 文件名”来完成。加密后会生成一个原文件名.gpg的文件。</p>
+
+<h2 id="section-14">解密文件</h2>
+
+<p>解密文件的操作如下：</p>
+
+<pre><code>$ gpg -d -r uidfile test.gpg
+gpg: 由 3072 位的 ELG-E 密钥加密，钥匙号为 6D72E230、生成于 2014-12-14
+      “uidfile (xxx) &lt;xxx@sina.com&gt;”
+test
+</code></pre>
+
+<p>除前两行显示外的内容是GPG显示到标准输出的内容。它是解密后文件的内容。可以将它重定向生成文件获取解密的文件。可以看到，加密前文件的内容是test。</p>
+
+<p>不知道是不是因为输出内容中有到非标准输出的内容，虽然进程的返回结果是0，但在expect这类脚本语言中会出现报错，无法正常执行。</p>
+
+<p>如果密钥生成时设置了密码，在解密时会提示输入，如果输入不正解是无法解密的。</p>
+
+<p>在UBUNTU环境中，如果输入过一次密码，那么之后都不用再输入，直到系统重新启动。</p>
+
+<h2 id="section-15">一些参考</h2>
+
+<p>由于应用更新等原因，网络上的信息需要“领会精神”，要看最准确的参考文档，还是要看最新的官方文档或man帮助。以下是一些中文的参考文章：</p>
+
+<p>http://www.linuxfly.org/post/274/</p>
+
+<p>https://www.gnupg.org/howtos/zh/GPGMiniHowto-1.html
+&lt;p class=&#8217;post-footer&#8217;&gt;
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">http://pangyi.github.io/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+ posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+&lt;/p&gt;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">PangYi</span></span>
+
+      
+
+
+
+
+2015年01月03日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jia-mi/'>加密</a>
+  
+</span>
+
+
+      
+
+<span class="tags">
+  
+    <a class='tag' href='/tags/gpg/'>GPG</a>, <a class='tag' href='/tags/jia-mi/'>加密</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+<!-- JiaThis Button -->
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_fav"></a>
+	<a class="jiathis_button_twitter"></a>
+	<a class="jiathis_button_pocket"></a>
+	<a href="http://www.jiathis.com/share?uid=1980819" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1980819" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1980819"></script>
+<!-- UY END -->
+
+  
+  
+  
+  
+</div>
+
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/" title="Previous Post: 设置octopress首页的日期格式">&laquo; 设置octopress首页的日期格式</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/" title="Next Post: 同步octopress文章到支持MetaWeblog的博客">同步octopress文章到支持MetaWeblog的博客 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>最新文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">配置nginx支持PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150118/vimchuang-kou-cao-zuo/">VIM窗口操作</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">设置octopress首页的日期格式</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>标签分类</h1>
+  <ul class="tag-cloud">
+<a style="font-size: 60%" href="/tags/gpg/">GPG</a>
+<a style="font-size: 60%" href="/tags/metaweblog/">MetaWeblog</a>
+<a style="font-size: 60%" href="/tags/calibre/">calibre</a>
+<a style="font-size: 60%" href="/tags/kindle/">kindle</a>
+<a style="font-size: 60%" href="/tags/nginx/">nginx</a>
+<a style="font-size: 165%" href="/tags/octopress/">octopress</a>
+<a style="font-size: 60%" href="/tags/php/">php</a>
+<a style="font-size: 60%" href="/tags/php-fpm/">php-fpm</a>
+<a style="font-size: 60%" href="/tags/ttt/">ttt</a>
+<a style="font-size: 126%" href="/tags/vim/">vim</a>
+<a style="font-size: 60%" href="/tags/jia-mi/">加密</a>
+<a style="font-size: 60%" href="/tags/kuo-zhan/">扩展</a>
+<a style="font-size: 60%" href="/tags/cha-jian/">插件</a>
+<a style="font-size: 60%" href="/tags/ce-shi/">测试</a>
+<a style="font-size: 60%" href="/tags/mu-lu/">目录</a>
+<a style="font-size: 60%" href="/tags/wang-luo/">网络</a>
+
+  </ul>
+</section>
+<section>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/calibre/'>calibre (1)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopressce-shi/'>octopress测试 (1)</a></li>
+<li class='category'><a href='/blog/categories/vim/'>vim (2)</a></li>
+<li class='category'><a href='/blog/categories/jia-mi/'>加密 (1)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo/'>网络 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - PangYi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+</body>
+</html>

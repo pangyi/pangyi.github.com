@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: php | 松鼠窝]]></title>
+  <link href="http://pangyi.github.io/tags/php/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2015-01-18T17:28:50+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[PangYi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[配置nginx支持PHP]]></title>
+    <link href="http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/"/>
+    <updated>2015-01-18T16:06:07+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php</id>
+    <content type="html"><![CDATA[<p>nginx本身不支持php。如果需要使用php，需要安装php解析服务，如php-fpm，或spawn-fcgi等。从在Ubuntu上配置的便捷性考虑，这次使用php-fpm实现。</p>
+
+<!-- more -->
+
+<h2 id="phpphp-fpm">安装php和php-fpm</h2>
+
+<p>安装方法，略……</p>
+
+<p>因为可以直接用包管理器安装。</p>
+
+<p>安装后需要启动服务。</p>
+
+<h2 id="nginx">修改nginx配置文件</h2>
+
+<p>修改配置文件/etc/nginx/sites-available/default，首先让让默认页面里有php文件：</p>
+
+<pre><code>index index.php index.html index.htm;
+</code></pre>
+
+<p>接着开启php支持，找到“location ~ .php”部分，将其中的注释进行修改：</p>
+
+<pre><code>location ~ \.php$ {
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+	# With php5-cgi alone:
+#	fastcgi_pass 127.0.0.1:9000;
+	# With php5-fpm:
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
+	fastcgi_index index.php;
+	include fastcgi_params;
+}
+</code></pre>
+
+<p>“fastcgi_pass 127.0.0.1:9000;”与spawn-fcgi有关，故要注释。修改配置文件后需要重启nginx服务。</p>
+
+<h2 id="section">原理</h2>
+
+<p>按网上的说法：“nginx本身不能处理PHP，它只是个web服务器，当接收到请求后，如果是php请求，则发给php解释器处理，并把结果返回给客户端。nginx一般是把请求发fastcgi管理进程处理，fascgi管理进程选择cgi子进程处理结果并返回被nginx”。也就是说，nginx将处理请求交给php5-fpm，再接收处理返回结果。</p>
+
+<h2 id="section-1">参考</h2>
+
+<p>http://www.nginx.cn/231.html</p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,7 @@
   <meta name="author" content="PangYi">
 
   
-  <meta name="description" content="通过_config.yml中的date_format参数设置对我目前使用的2.0版本的octopress的首页中的文章日期的显示不起作用，需要用其它方式进行设置。 ">
+  <meta name="description" content="nginx本身不支持php。如果需要使用php，需要安装php解析服务，如php-fpm，或spawn-fcgi等。从在Ubuntu上配置的便捷性考虑，这次使用php-fpm实现。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,182 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">配置nginx支持PHP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>nginx本身不支持php。如果需要使用php，需要安装php解析服务，如php-fpm，或spawn-fcgi等。从在Ubuntu上配置的便捷性考虑，这次使用php-fpm实现。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150118/vimchuang-kou-cao-zuo/">VIM窗口操作</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="section">开窗</h2>
+
+<h3 id="section-1">横向切割（水平排列）窗口</h3>
+
+<p>:new+窗口名(保存后就是文件名)	窗口名可选</p>
+
+<p>:split+窗口名，也可以简写为:sp+窗口名	当前文件分别显示到了两个窗口，内容完全相同，并保持同步。</p>
+
+<h3 id="section-2">纵向切割（垂直排列）窗口</h3>
+
+<p>:vsplit+窗口名，也可以简写为：vsp+窗口名</p>
+
+<h2 id="section-3">切窗</h2>
+
+<p>Ctrl-w w	向后切换窗口，窗口操作都使用Ctrl-w开头。</p>
+
+<p>Ctrl-w p	切换回上一个窗口，注意不是与w对应的操作。</p>
+
+<p>Ctrl-w h	切换到左边窗口，如果有的话，下同</p>
+
+<p>Ctrl-w l	切换到右边窗口</p>
+
+<p>Ctrl-w j	切换到下面窗口</p>
+
+<p>ctrl-w k	切换到上面窗口，这4个操作与光标操作的键位对应。</p>
+
+<h2 id="section-4">其它</h2>
+
+<p>Ctrl-w +	扩大窗口，如果还可以的话，因为是平均扩大，不会同时缩小其它窗口</p>
+
+<p>Ctrl-w -	缩小窗口，窗口大小减一行。</p>
+
+<p>Ctrl-w行数+	扩大窗口指定的行数。注意与Ctrl-w +不同，此命令只扩大当前窗口。</p>
+
+<p>Ctrl-w行数-	缩小窗口指定的行数。</p>
+
+<h2 id="section-5">参考文章</h2>
+
+<p>http://blog.csdn.net/jeffry_cheng/article/details/6167378</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/">http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>同步octopress文章到支持MetaWeblog的博客需要用到<a href="https://github.com/huangbowen521/octopress-syncPost">一个插件</a>。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>主要内容：GPG加密解密的基本操作与少量应用。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -235,7 +411,7 @@
 </span><span class="line"><span class="k">endfunction</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+<p>功能就是从19行起，插入要增加的内容。快捷键是F7</p>
 
 <p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
 
@@ -320,142 +496,6 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141118/ce-shi-cha-jian/">测试插件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月18日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141118/ce-shi-cha-jian/">http://pangyi.github.io/blog/20141118/ce-shi-cha-jian/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141105/ce-shi-wen-jian-tou/">测试文件头</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月05日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou/">http://pangyi.github.io/blog/20141105/ce-shi-wen-jian-tou/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141103/ce-shi-o/">测试o</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月03日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141103/ce-shi-o/">http://pangyi.github.io/blog/20141103/ce-shi-o/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141103/ce-shi/">测试</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月03日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141103/ce-shi/">http://pangyi.github.io/blog/20141103/ce-shi/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -471,23 +511,23 @@ written by <a href="http://pangyi.github.io">PangYi</a>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">配置nginx支持PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150118/vimchuang-kou-cao-zuo/">VIM窗口操作</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">设置octopress首页的日期格式</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/">网络测试工具netperf</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/">用calibre抓取RSS新闻制作电子书及推送到kindle</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/">增加octopress的说明和目录的VIM函数和快捷键配置</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/20141119/testzhong-he-kong-ge/">Test中和 空格</a>
       </li>
     
   </ul>
@@ -499,12 +539,19 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 <section>
   <h1>标签分类</h1>
   <ul class="tag-cloud">
+<a style="font-size: 60%" href="/tags/gpg/">GPG</a>
+<a style="font-size: 60%" href="/tags/metaweblog/">MetaWeblog</a>
 <a style="font-size: 60%" href="/tags/calibre/">calibre</a>
 <a style="font-size: 60%" href="/tags/kindle/">kindle</a>
+<a style="font-size: 60%" href="/tags/nginx/">nginx</a>
 <a style="font-size: 165%" href="/tags/octopress/">octopress</a>
+<a style="font-size: 60%" href="/tags/php/">php</a>
+<a style="font-size: 60%" href="/tags/php-fpm/">php-fpm</a>
 <a style="font-size: 60%" href="/tags/ttt/">ttt</a>
-<a style="font-size: 60%" href="/tags/vim/">vim</a>
+<a style="font-size: 126%" href="/tags/vim/">vim</a>
+<a style="font-size: 60%" href="/tags/jia-mi/">加密</a>
 <a style="font-size: 60%" href="/tags/kuo-zhan/">扩展</a>
+<a style="font-size: 60%" href="/tags/cha-jian/">插件</a>
 <a style="font-size: 60%" href="/tags/ce-shi/">测试</a>
 <a style="font-size: 60%" href="/tags/mu-lu/">目录</a>
 <a style="font-size: 60%" href="/tags/wang-luo/">网络</a>
@@ -515,9 +562,11 @@ written by <a href="http://pangyi.github.io">PangYi</a>
   <h1>分类目录</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/calibre/'>calibre (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
 <li class='category'><a href='/blog/categories/octopressce-shi/'>octopress测试 (1)</a></li>
-<li class='category'><a href='/blog/categories/vim/'>vim (1)</a></li>
+<li class='category'><a href='/blog/categories/vim/'>vim (2)</a></li>
+<li class='category'><a href='/blog/categories/jia-mi/'>加密 (1)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo/'>网络 (1)</a></li>
 
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: vim | 松鼠窝]]></title>
   <link href="http://pangyi.github.io/tags/vim/atom.xml" rel="self"/>
   <link href="http://pangyi.github.io/"/>
-  <updated>2015-01-02T23:05:41+08:00</updated>
+  <updated>2015-01-18T17:28:50+08:00</updated>
   <id>http://pangyi.github.io/</id>
   <author>
     <name><![CDATA[PangYi]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[VIM窗口操作]]></title>
+    <link href="http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo/"/>
+    <updated>2015-01-18T13:06:07+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150118/vimchuang-kou-cao-zuo</id>
+    <content type="html"><![CDATA[<h2 id="section">开窗</h2>
+
+<h3 id="section-1">横向切割（水平排列）窗口</h3>
+
+<p>:new+窗口名(保存后就是文件名)	窗口名可选</p>
+
+<p>:split+窗口名，也可以简写为:sp+窗口名	当前文件分别显示到了两个窗口，内容完全相同，并保持同步。</p>
+
+<h3 id="section-2">纵向切割（垂直排列）窗口</h3>
+
+<p>:vsplit+窗口名，也可以简写为：vsp+窗口名</p>
+
+<h2 id="section-3">切窗</h2>
+
+<p>Ctrl-w w	向后切换窗口，窗口操作都使用Ctrl-w开头。</p>
+
+<p>Ctrl-w p	切换回上一个窗口，注意不是与w对应的操作。</p>
+
+<p>Ctrl-w h	切换到左边窗口，如果有的话，下同</p>
+
+<p>Ctrl-w l	切换到右边窗口</p>
+
+<p>Ctrl-w j	切换到下面窗口</p>
+
+<p>ctrl-w k	切换到上面窗口，这4个操作与光标操作的键位对应。</p>
+
+<h2 id="section-4">其它</h2>
+
+<p>Ctrl-w +	扩大窗口，如果还可以的话，因为是平均扩大，不会同时缩小其它窗口</p>
+
+<p>Ctrl-w -	缩小窗口，窗口大小减一行。</p>
+
+<p>Ctrl-w行数+	扩大窗口指定的行数。注意与Ctrl-w +不同，此命令只扩大当前窗口。</p>
+
+<p>Ctrl-w行数-	缩小窗口指定的行数。</p>
+
+<h2 id="section-5">参考文章</h2>
+
+<p>http://blog.csdn.net/jeffry_cheng/article/details/6167378</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[增加octopress的说明和目录的VIM函数和快捷键配置]]></title>
@@ -45,7 +93,7 @@ function OctopressIndex()
 <pre><code>echohl WarningMsg | echo "Successful in adding the Octopress Index and read on." | echohl None endfunction ```
 </code></pre>
 
-<p>功能就是从19行起，插入要增加的内容。快捷键是<f7></f7></p>
+<p>功能就是从19行起，插入要增加的内容。快捷键是F7</p>
 
 <p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
 

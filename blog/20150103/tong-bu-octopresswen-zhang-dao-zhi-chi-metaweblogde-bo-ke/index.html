@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>同步octopress文章到支持MetaWeblog的博客 - 松鼠窝</title>
+  <meta name="author" content="PangYi">
+
+  
+  <meta name="description" content="同步octopress文章到支持MetaWeblog的博客需要用到一个插件。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。 获得插件 修改插件 配置配置文件 安装相关的组件 同步博文 其它参考： 获得插件 &hellip;">
+  <meta name="keywords" content="octopress, 插件, 同步, MetaWeblog">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="松鼠窝" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Font Awesome icons-->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+ <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">松鼠窝</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pangyi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/"><i class="fa fa-home"></i> 博客首页</a></li>
+	<li><a href="/blog/archives"><i class="fa fa-list"></i> 文章列表</a></li>
+  </ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">同步octopress文章到支持MetaWeblog的博客</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月03日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>同步octopress文章到支持MetaWeblog的博客需要用到<a href="https://github.com/huangbowen521/octopress-syncPost">一个插件</a>。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">获得插件</a></li>
+  <li><a href="#section-1">修改插件</a></li>
+  <li><a href="#section-2">配置配置文件</a></li>
+  <li><a href="#section-3">安装相关的组件</a></li>
+  <li><a href="#section-4">同步博文</a></li>
+  <li><a href="#section-5">其它参考：</a></li>
+</ul>
+
+<h2 id="section">获得插件</h2>
+
+<p>从github上获得插件中plugins中的5个ruby文件，分别实现同步全部博客，同步最后一篇博客，同步指定时间之后的博客，同步指定标题的博客等（有一个公共调用文件）。对这些文件要单独建一个目录存放，比如在octopress的根目录下建一个syncmeta目录。然后将插件放入此目录。</p>
+
+<p>这样做是因为目前版本的octopress中的rake generate操作（实际执行的是jekyll build）时，会把plugins中的所有ruby文件执行一遍，这样做一次rake generate操作，就会做一次同步全部博客，同步最后一篇博客……</p>
+
+<h2 id="section-1">修改插件</h2>
+
+<p>在所有插件中找到：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">require</span> <span class="s1">&#39;./plugins/sync_post.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>改为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">require</span> <span class="s1">&#39;./syncmeta/sync_post.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-2">配置配置文件</h2>
+
+<p>Rakefile的配置完全按github上的说明，_config.yml中的MetaWeblog_url一项，需要使用最新的博客离线编辑的插件URL，如cnblog上我的博客的url就是http://rpc.cnblogs.com/metaweblog/maoxiong ，而不是插件说明中的那样。</p>
+
+<h2 id="section-3">安装相关的组件</h2>
+
+<p>在Gemfile中加入：</p>
+
+<pre><code>gem 'metaweblog', '~&gt; 0.1.0'
+gem 'nokogiri', '~&gt; 1.5.9'
+</code></pre>
+
+<p>然后执行bundle install进行安装。</p>
+
+<p>安装中会报一些与库文件相关的错误，可以安装相关库文件：</p>
+
+<pre><code>sudo apt-get install libxml2-dev libxslt-dev
+</code></pre>
+
+<h2 id="section-4">同步博文</h2>
+
+<ul>
+  <li>同步最后一篇博文：rake sync_latest_post[“PASSWD”]</li>
+</ul>
+
+<p>命令中只能输入一个密码，如果有多个博客要同步，要把它们的密码设置成一样的，下同。</p>
+
+<p>在命令中输入密码时，密码最好不要有通常用于转义用的特殊字符，否则可能有问题。</p>
+
+<p>如果不输入密码，则会在执行过程中要求输入每个博客的密码。此时密码中的特殊字符不影响使用。</p>
+
+<ul>
+  <li>
+    <p>同步全部博文：sync_all_posts[“PASSWD”]</p>
+  </li>
+  <li>
+    <p>同步某一时间之后的博文：rake sync_posts_after_date[“date”,”PASSWD”]</p>
+  </li>
+</ul>
+
+<p>date类似于”2013-01-01” 、 “2013/01/01” 、 “Jan 1 2013”。如果更改了Octopress生成Blog的目录结构，会报类似“sync_post.rb: 权限不够”之类的错误。实际原因是插件中查找目录的部分使用的代码是按默认的目录结构设计的。这部分代码在sync_post.rb的第51行：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="n">postDate</span> <span class="o">=</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path</span><span class="o">[</span><span class="sr">/\d{4}\/\d{2}\/\d{2}/</span><span class="o">]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>需要对它进行修改以适应定制后的目录结构。</p>
+
+<p>不清楚是不是与改过目录结构有关，按时间同步的速度非常慢。</p>
+
+<ul>
+  <li>同步指定标题的博文：rake sync_post_by_title[“title”,”PASSWD”]</li>
+</ul>
+
+<p>此处的title是博客标题，不是文件名。中文的标题在Octopress中会被替换成拼音。空格也会被替换成“-”。所以博客标题和文件名并不对应。</p>
+
+<h2 id="section-5">其它参考：</h2>
+
+<p>解决安装gem中的报错，并从中获得了修改日期目录结构的灵感：</p>
+
+<p>http://fzyz999.github.io/blog/2013/05/06/ru-he-shi-yong-octopresscha-jian-tong-bu-bo-wen-dao-oschinashang/</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">http://pangyi.github.io/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">PangYi</span></span>
+
+      
+
+
+
+
+2015年01月03日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+      
+
+<span class="tags">
+  
+    <a class='tag' href='/tags/metaweblog/'>MetaWeblog</a>, <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/cha-jian/'>插件</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+<!-- JiaThis Button -->
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_fav"></a>
+	<a class="jiathis_button_twitter"></a>
+	<a class="jiathis_button_pocket"></a>
+	<a href="http://www.jiathis.com/share?uid=1980819" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1980819" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1980819"></script>
+<!-- UY END -->
+
+  
+  
+  
+  
+</div>
+
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/" title="Previous Post: GPG加密解密与实际应用">&laquo; GPG加密解密与实际应用</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/20150118/vimchuang-kou-cao-zuo/" title="Next Post: VIM窗口操作">VIM窗口操作 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>最新文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">配置nginx支持PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150118/vimchuang-kou-cao-zuo/">VIM窗口操作</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">设置octopress首页的日期格式</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>标签分类</h1>
+  <ul class="tag-cloud">
+<a style="font-size: 60%" href="/tags/gpg/">GPG</a>
+<a style="font-size: 60%" href="/tags/metaweblog/">MetaWeblog</a>
+<a style="font-size: 60%" href="/tags/calibre/">calibre</a>
+<a style="font-size: 60%" href="/tags/kindle/">kindle</a>
+<a style="font-size: 60%" href="/tags/nginx/">nginx</a>
+<a style="font-size: 165%" href="/tags/octopress/">octopress</a>
+<a style="font-size: 60%" href="/tags/php/">php</a>
+<a style="font-size: 60%" href="/tags/php-fpm/">php-fpm</a>
+<a style="font-size: 60%" href="/tags/ttt/">ttt</a>
+<a style="font-size: 126%" href="/tags/vim/">vim</a>
+<a style="font-size: 60%" href="/tags/jia-mi/">加密</a>
+<a style="font-size: 60%" href="/tags/kuo-zhan/">扩展</a>
+<a style="font-size: 60%" href="/tags/cha-jian/">插件</a>
+<a style="font-size: 60%" href="/tags/ce-shi/">测试</a>
+<a style="font-size: 60%" href="/tags/mu-lu/">目录</a>
+<a style="font-size: 60%" href="/tags/wang-luo/">网络</a>
+
+  </ul>
+</section>
+<section>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/calibre/'>calibre (1)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopressce-shi/'>octopress测试 (1)</a></li>
+<li class='category'><a href='/blog/categories/vim/'>vim (2)</a></li>
+<li class='category'><a href='/blog/categories/jia-mi/'>加密 (1)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo/'>网络 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - PangYi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+</body>
+</html>
