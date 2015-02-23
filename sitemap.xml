@@ -3,6 +3,70 @@
   
   
   <url>
+    <loc>http://pangyi.github.io/blog/20150223/zai-ubuntu14ban-ben-shang-shi-yong-dnsmasqpei-zhi-zi-ding-yi-de-jian-yi-dnsfu-wu/</loc>
+    
+    <lastmod>2015-02-23T15:59:52+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/shi-yong-you-yan-zuo-octopressde-ping-lun-xi-tong-,shi-yong-jia-wang-zuo-fen-xiang/</loc>
+    
+    <lastmod>2015-01-25T17:31:02+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/zai-octopresszhong-zeng-jia-fan-hui-ding-bu-an-niu/</loc>
+    
+    <lastmod>2015-01-25T17:07:51+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/rang-octopresszhi-chi-biao-qian-(tag)/</loc>
+    
+    <lastmod>2015-01-25T16:30:25+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/wei-octopresswen-zhang-jia-ru-yuan-wen-lian-jie/</loc>
+    
+    <lastmod>2015-01-25T16:11:17+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/octopressshi-yong-zhong-jing-yan-zong-jie/</loc>
+    
+    <lastmod>2015-01-25T15:59:17+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/ubuntuzhong-octopressan-zhuang/</loc>
+    
+    <lastmod>2015-01-25T15:24:46+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://pangyi.github.io/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/</loc>
+    
+    <lastmod>2015-01-25T14:55:37+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://pangyi.github.io/blog/20150118/pei-zhi-nginxzhi-chi-php/</loc>
     
     <lastmod>2015-01-18T16:06:07+08:00</lastmod>
@@ -162,31 +226,39 @@
     <priority>0.8</priority>
   </url>
   
+  <url>
+    <loc>http://pangyi.github.io/blog/20010101/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/</loc>
+    
+    <lastmod>2001-01-01T09:22:53+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
   
   <url>
     <loc>http://pangyi.github.io/blog/archives/</loc>
-    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
+    <lastmod>2015-02-23T16:06:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/</loc>
-    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
+    <lastmod>2015-02-23T16:06:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/</loc>
-    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
+    <lastmod>2015-02-23T16:06:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://pangyi.github.io/ce-shi-xin-ye-mian/test.html</loc>
-    <lastmod>2015-01-18T17:28:50+08:00</lastmod>
+    <lastmod>2015-02-23T16:06:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

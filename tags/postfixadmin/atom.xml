@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: postfixadmin | 松鼠窝]]></title>
+  <link href="http://pangyi.github.io/tags/postfixadmin/atom.xml" rel="self"/>
+  <link href="http://pangyi.github.io/"/>
+  <updated>2015-02-23T16:06:37+08:00</updated>
+  <id>http://pangyi.github.io/</id>
+  <author>
+    <name><![CDATA[PangYi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UBUNTU下使用PostgreSql.和nginx安装postfixAdmin2.92版]]></title>
+    <link href="http://pangyi.github.io/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/"/>
+    <updated>2015-01-25T14:55:37+08:00</updated>
+    <id>http://pangyi.github.io/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban</id>
+    <content type="html"><![CDATA[<p>本文为在Ubuntu14.04中使用PostgreSql和Nginx安装PostfixAdmin2.92版的记录。</p>
+
+<!-- more -->
+
+<h2 id="section">需要安装的包</h2>
+
+<p>记忆有些模糊，大概列一下：</p>
+
+<p>postfix，PostgreSql，postfix-pgsql，php5-pgsql，nginx，php5-fpm，这些包可以通过Ubuntu的包管理安装。</p>
+
+<h2 id="section-1">准备工作</h2>
+
+<p>需要配置nginx支持php，方法见另外的文。</p>
+
+<p>需要建立PostfixAdmi使用的PostgreSql数据库和数据库用户，并配置可以通过网络登录。</p>
+
+<p>建数据库用户可以在psql中执行：</p>
+
+<pre><code>create user postfix;
+</code></pre>
+
+<p>创建数据库可以用命令：</p>
+
+<pre><code>createdb postfixdb -O postfix
+</code></pre>
+
+<h2 id="section-2">安装包下载</h2>
+
+<p><a href="http://postfixadmin.sourceforge.net/">官方网站</a>上可以找到<a href="https://sourceforge.net/projects/postfixadmin/files/">下载链接</a>
+由于是使用的ubuntu中的nginx，下载后把压缩包解压到/usr/share/nginx/html中，重命名为postfixadmin。并修改属主为www-data：</p>
+
+<pre><code>sudo chown -R www-data postfixadmin
+</code></pre>
+
+<h2 id="section-3">初始化配置</h2>
+
+<h3 id="section-4">初始化配置文件修改</h3>
+
+<p>运行setup.php之前，需要修改config.ini.php。对这个文件修改项的diff结果（修改后的在前为：</p>
+
+<pre><code>&lt; $CONF['configured'] = false;
+---
+&gt; $CONF['configured'] = true;
+30c30
+&lt; $CONF['setup_password'] = 'changeme';
+---
+&gt; $CONF['setup_password'] = '290c3045f1e273b6725835242ea7cf3d:87937c8fd844a8d4eac9b5cea48393224379663a';
+34c34
+&lt; $CONF['default_language'] = 'en';
+---
+&gt; $CONF['default_language'] = 'cn';
+83c83
+&lt; $CONF['database_type'] = 'mysqli';
+---
+&gt; $CONF['database_type'] = 'pgsql';
+86,87c86,87
+&lt; $CONF['database_password'] = 'postfixadmin';
+&lt; $CONF['database_name'] = 'postfix';
+---
+&gt; $CONF['database_password'] = 'yourpassword';
+&gt; $CONF['database_name'] = 'postfixdb';
+</code></pre>
+
+<p>setup_password一项与之后的设置有关，见下文，database_type一项如何设置配置文件中有说明，而configured需要改为true，才能进行初始化。</p>
+
+<h3 id="section-5">初始化配置</h3>
+
+<p>在浏览器中打开http://127.0.0.1/postfixadmin/setup.php/ 开始进行初始化配置。由于开始配置时没有截图，这里借用网上的其它图来说明一下，主要问题在设置管理员用户上，之前的环境检查问题不大。在设置管理员用户时，输入在config.ini.php中配置的setup_password报错，类似：</p>
+
+<pre><code>if you want to use the password you entered as setup password, edit config.inc.php and set
+ 
+$CONF['setup_password'] = '1a05f571012e9f14c0f80f764d516f80:ec41add25de301101bac12649f929bbcbea8575e';
+</code></pre>
+
+<p>把显示内容更新到config.ini.php，之后再进行配置就可以完成管理员用户的配置了：</p>
+
+<p><img src="/images/postfixadmin-createadmin.png"></p>
+
+<h2 id="section-6">使用</h2>
+
+<p>打开http://127.0.0.1/postfixadmin/ ，进入登录页面，用之前建立的管理员用户登录就会进入管理界面：</p>
+
+<p><img src="/images/postfixadmin.png"></p>
+
+<h2 id="section-7">参考</h2>
+
+<p>有关建立管理员时口令报错的问题：</p>
+
+<p>http://www.tuicool.com/articles/yMfq22</p>
+
+<p>一个比较老版本的配置，供参考一些思路吧：</p>
+
+<p>http://blog.sina.com.cn/s/blog_57cf8eea0100aogd.html</p>
+
+]]></content>
+  </entry>
+  
+</feed>

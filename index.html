@@ -9,7 +9,7 @@
   <meta name="author" content="PangYi">
 
   
-  <meta name="description" content="nginx本身不支持php。如果需要使用php，需要安装php解析服务，如php-fpm，或spawn-fcgi等。从在Ubuntu上配置的便捷性考虑，这次使用php-fpm实现。 ">
+  <meta name="description" content="现在的UBUNTU桌面发行版已经自带了dnsmasq，如何再配置自己的DNS配置？ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,288 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150223/zai-ubuntu14ban-ben-shang-shi-yong-dnsmasqpei-zhi-zi-ding-yi-de-jian-yi-dnsfu-wu/">在ubuntu14版本上使用dnsmasq配置自定义的简易DNS服务</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年02月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>现在的UBUNTU桌面发行版已经自带了dnsmasq，如何再配置自己的DNS配置？</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150223/zai-ubuntu14ban-ben-shang-shi-yong-dnsmasqpei-zhi-zi-ding-yi-de-jian-yi-dnsfu-wu/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/shi-yong-you-yan-zuo-octopressde-ping-lun-xi-tong-,shi-yong-jia-wang-zuo-fen-xiang/">使用友言做octopress的评论系统，使用加网做分享</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>友言、加网是一家子。正好各做各用，用友言替代disqus评论系统，用加网做分享到微X的功能。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/shi-yong-you-yan-zuo-octopressde-ping-lun-xi-tong-,shi-yong-jia-wang-zuo-fen-xiang/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/zai-octopresszhong-zeng-jia-fan-hui-ding-bu-an-niu/">在octopress中增加“返回顶部”按钮</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>通过“返回顶部”按钮，可以快速返回页首。配置按照<a href="http://812lcl.com/blog/2013/10/27/octopresszhu-ti-yang-shi-xiu-gai/">Octopress主题样式修改</a>一文。但照着做下来并不能实现配置。因此到疑似作者812lcl的github仓库中找了最新版本的配置。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/zai-octopresszhong-zeng-jia-fan-hui-ding-bu-an-niu/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/rang-octopresszhi-chi-biao-qian-(tag)/">让octopress支持标签（tag）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section">安装插件</a>    <ul>
+      <li><a href="#octopress-tag-cloud">octopress-tag-cloud</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-1">在侧边栏显示标签云</a></li>
+  <li><a href="#section-2">使用</a></li>
+  <li><a href="#section-3">参考</a></li>
+</ul>
+
+<h2 id="section">安装插件</h2>
+
+<p>目前有多个插件实现标签功能。其中一个是octopress<a href="https://github.com/tokkonopapa/octopress-tagcloud">官方推荐版本</a>，据说不支持多标签。还有些人用的是“3D”标签云，风格上我不是太喜欢。最终选用的是robbyedwards的一组插件。这组插件有两个，一个是<a href="https://github.com/robbyedwards/octopress-tag-pages">octopress-tag-pages</a>，用于生成标签页面，另一个是<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>，用于显示实现标签云功能。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/rang-octopresszhi-chi-biao-qian-(tag)/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/wei-octopresswen-zhang-jia-ru-yuan-wen-lian-jie/">为octopress文章加入原文链接</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>给博文加入原文链接的作用不消多说。由于在网上找的到诸篇文章或年久有变，或有重要的错误，因此自己总结记录一下，以作备忘。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/wei-octopresswen-zhang-jia-ru-yuan-wen-lian-jie/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/octopressshi-yong-zhong-jing-yan-zong-jie/">Octopress使用中经验总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/octopressshi-yong-zhong-jing-yan-zong-jie/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/ubuntuzhong-octopressan-zhuang/">Ubuntu中octopress安装</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是一篇按官方说明进行安装的说明，但后记中记录了如何使用Ubuntu自己的包管理系统中包含的ruby版本进行安装的方法。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/ubuntuzhong-octopressan-zhuang/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/">UBUNTU下使用PostgreSql.和nginx安装postfixAdmin2.92版</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文为在Ubuntu14.04中使用PostgreSql和Nginx安装PostfixAdmin2.92版的记录。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -180,322 +462,6 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2015年01月03日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>同步octopress文章到支持MetaWeblog的博客需要用到<a href="https://github.com/huangbowen521/octopress-syncPost">一个插件</a>。可能由于版本的问题，安装和配置需要做一些调整，否则如果按插件的说明来安装配置虽然能实现功能，但总有些不太合适的地方。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2015年01月03日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>主要内容：GPG加密解密的基本操作与少量应用。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">设置octopress首页的日期格式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2015年01月02日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>通过_config.yml中的date_format参数设置对我目前使用的2.0版本的octopress的首页中的文章日期的显示不起作用，需要用其它方式进行设置。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/">网络测试工具netperf</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年12月10日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一般我们进行网络测试，主要是测试网络的连通性、网络带宽、网络响应时间等。常用的工具包括ping、traceroute、telnet、ftp等。如测试网络连通性，可以使用ping，traceroute，如果测试防火墙是否配置正确，可以使用telnet和traceroute -p，使用ping命令可以测试网络延迟，ftp则用来测试网络带宽。</p>
-
-<p>但如果需要做一些更为深入的测试，如测试不同包大小的不同类型的业务的网络处理能力，则需要更专业的工具，如netperf，iperf等。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/20141210/wang-luo-ce-shi-gong-ju-netperf/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/">用calibre抓取RSS新闻制作电子书及推送到kindle</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年12月08日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>calibre可以从RSS源抓取内容，转换成它所支持格式的电子书，还可以推送到阅读器设备。下面来看看在calibre图形界面和命令行下如何实现这些功能。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/20141208/yong-calibrezhua-qu-rssxin-wen-zhi-zuo-dian-zi-shu-ji-tui-song-dao-kindle/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/">增加octopress的说明和目录的VIM函数和快捷键配置</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月23日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>照猫画虎，写了一个函数，并加了一个快捷键，为octopress文章增加一些特定的内容，好在文章列表和首页处显示文章简介或摘要，并给文章建立目录。</p>
-
-<p>之所以把这两部分合并在一起，是因为加了目录后，目录就成了文章最前面的内容，这时目录会作为文章开头内容显示在首页，不大好看，所以这两个东东一般是要配合使用的。</p>
-
-<p>所需要增加的内容如下：</p>
-
-<pre><code>&lt;!-- more --&gt;
-
-* list element with functor item
-{:toc}
-</code></pre>
-
-<p>实现这一功能的函数放在.vimrc中，代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="vim"><span class="line">map <span class="p">&lt;</span>F7<span class="p">&gt;</span> :<span class="k">call</span> OctopressIndex<span class="p">()&lt;</span><span class="k">cr</span><span class="p">&gt;</span>&#39;<span class="k">s</span>
-</span><span class="line"><span class="k">function</span> OctopressIndex<span class="p">()</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">19</span><span class="p">,</span><span class="s2">&quot;&lt;!-- more --&gt;&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">21</span><span class="p">,</span><span class="s2">&quot;* list element with functor item&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">22</span><span class="p">,</span><span class="s2">&quot;{:toc}&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">call</span> append<span class="p">(</span><span class="m">23</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span class="line">
-</span><span class="line">    echohl WarningMsg <span class="p">|</span> echo <span class="s2">&quot;Successful in adding the Octopress Index and read on.&quot;</span> <span class="p">|</span> echohl None
-</span><span class="line"><span class="k">endfunction</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>功能就是从19行起，插入要增加的内容。快捷键是F7</p>
-
-<p>这里要说明一下，因为我的文章是先在VimWiki中写的，前面会加一个文件头，因此要从19行加起。写完之后，我会利用vimdiff的功能，将内容合并到博客文章中发布。</p>
-
-<p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/">http://pangyi.github.io/blog/20141123/zeng-jia-octopressde-shuo-ming-he-mu-lu-de-vimhan-shu-he-kuai-jie-jian-pei-zhi/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141119/testzhong-he-kong-ge/">Test中和 空格</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月19日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141119/testzhong-he-kong-ge/">http://pangyi.github.io/blog/20141119/testzhong-he-kong-ge/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/20141119/testce-shi/">Test测试</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-2014年11月19日
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class="post-footer">
-原文链接地址：
-<a href="http://pangyi.github.io/blog/20141119/testce-shi/">http://pangyi.github.io/blog/20141119/testce-shi/</a><br />
-written by <a href="http://pangyi.github.io">PangYi</a>
-&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -511,23 +477,23 @@ written by <a href="http://pangyi.github.io">PangYi</a>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/20150118/pei-zhi-nginxzhi-chi-php/">配置nginx支持PHP</a>
+        <a href="/blog/20150223/zai-ubuntu14ban-ben-shang-shi-yong-dnsmasqpei-zhi-zi-ding-yi-de-jian-yi-dnsfu-wu/">在ubuntu14版本上使用dnsmasq配置自定义的简易DNS服务</a>
       </li>
     
       <li class="post">
-        <a href="/blog/20150118/vimchuang-kou-cao-zuo/">VIM窗口操作</a>
+        <a href="/blog/20150125/shi-yong-you-yan-zuo-octopressde-ping-lun-xi-tong-,shi-yong-jia-wang-zuo-fen-xiang/">使用友言做octopress的评论系统，使用加网做分享</a>
       </li>
     
       <li class="post">
-        <a href="/blog/20150103/tong-bu-octopresswen-zhang-dao-zhi-chi-metaweblogde-bo-ke/">同步octopress文章到支持MetaWeblog的博客</a>
+        <a href="/blog/20150125/zai-octopresszhong-zeng-jia-fan-hui-ding-bu-an-niu/">在octopress中增加“返回顶部”按钮</a>
       </li>
     
       <li class="post">
-        <a href="/blog/20150103/gpgjia-mi-jie-mi-yu-shi-ji-ying-yong/">GPG加密解密与实际应用</a>
+        <a href="/blog/20150125/rang-octopresszhi-chi-biao-qian-(tag)/">让octopress支持标签（tag）</a>
       </li>
     
       <li class="post">
-        <a href="/blog/20150102/she-zhi-octopressshou-ye-de-ri-qi-ge-shi/">设置octopress首页的日期格式</a>
+        <a href="/blog/20150125/wei-octopresswen-zhang-jia-ru-yuan-wen-lian-jie/">为octopress文章加入原文链接</a>
       </li>
     
   </ul>
@@ -547,8 +513,10 @@ written by <a href="http://pangyi.github.io">PangYi</a>
 <a style="font-size: 165%" href="/tags/octopress/">octopress</a>
 <a style="font-size: 60%" href="/tags/php/">php</a>
 <a style="font-size: 60%" href="/tags/php-fpm/">php-fpm</a>
+<a style="font-size: 60%" href="/tags/postfix/">postfix</a>
+<a style="font-size: 60%" href="/tags/postfixadmin/">postfixadmin</a>
 <a style="font-size: 60%" href="/tags/ttt/">ttt</a>
-<a style="font-size: 126%" href="/tags/vim/">vim</a>
+<a style="font-size: 93%" href="/tags/vim/">vim</a>
 <a style="font-size: 60%" href="/tags/jia-mi/">加密</a>
 <a style="font-size: 60%" href="/tags/kuo-zhan/">扩展</a>
 <a style="font-size: 60%" href="/tags/cha-jian/">插件</a>
@@ -563,8 +531,9 @@ written by <a href="http://pangyi.github.io">PangYi</a>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/calibre/'>calibre (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (8)</a></li>
 <li class='category'><a href='/blog/categories/octopressce-shi/'>octopress测试 (1)</a></li>
+<li class='category'><a href='/blog/categories/postfix/'>postfix (1)</a></li>
 <li class='category'><a href='/blog/categories/vim/'>vim (2)</a></li>
 <li class='category'><a href='/blog/categories/jia-mi/'>加密 (1)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo/'>网络 (1)</a></li>

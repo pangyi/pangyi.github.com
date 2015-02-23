@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu中octopress安装 - 松鼠窝</title>
+  <meta name="author" content="PangYi">
+
+  
+  <meta name="description" content="这是一篇按官方说明进行安装的说明，但后记中记录了如何使用Ubuntu自己的包管理系统中包含的ruby版本进行安装的方法。 安装条件 Octopress的安装 后记——使用UBUNTU自带版本安装 安装条件 要有git，要有ruby1.9.3版，要有rvm或者rbenv。 &hellip;">
+  <meta name="keywords" content="octopress, 安装">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pangyi.github.io/blog/20150125/ubuntuzhong-octopressan-zhuang">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="松鼠窝" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Font Awesome icons-->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+  
+
+</head>
+
+<body   >
+ <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+  <header role="banner"><hgroup>
+  <h1><a href="/">松鼠窝</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.baidu.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pangyi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+	<li><a href="/"><i class="fa fa-home"></i> 博客首页</a></li>
+	<li><a href="/blog/archives"><i class="fa fa-list"></i> 文章列表</a></li>
+  </ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu中octopress安装</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+2015年01月25日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>这是一篇按官方说明进行安装的说明，但后记中记录了如何使用Ubuntu自己的包管理系统中包含的ruby版本进行安装的方法。</p>
+
+<!-- more -->
+
+<ul id="markdown-toc">
+  <li><a href="#section">安装条件</a></li>
+  <li><a href="#octopress">Octopress的安装</a>    <ul>
+      <li><a href="#ubuntu">后记——使用UBUNTU自带版本安装</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="section">安装条件</h1>
+
+<p>要有git，要有ruby1.9.3版，要有rvm或者rbenv。</p>
+
+<p>不过rvm似乎只是用来安装ruby，所以不清楚如果已经安装配置了ruby1.9.3版，是不是就不用它了呢？</p>
+
+<p>RVM的安装方法参考Octopress的<a href="http://octopress.org/docs/setup/rvm/">说明</a>是这样的：</p>
+
+<p>在命令行下执行：	</p>
+
+<!-- more -->
+
+<ul>
+  <li>list element with functor item</li>
+</ul>
+
+<pre><code>curl -L https://get.rvm.io | bash -s stable --ruby  &lt;!-- more --&gt;
+</code></pre>
+
+<ul>
+  <li>list element with functor item</li>
+</ul>
+
+<!-- more -->
+
+<ul>
+  <li>list element with functor item</li>
+</ul>
+
+<p>安装过程中会自动安装ruby2.1.2：</p>
+
+<pre><code>ruby-2.1.2 - #validate archive
+ruby-2.1.2 - #extract
+……
+$ ruby --version
+ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
+</code></pre>
+
+<p>所以应该需要：</p>
+
+<pre><code>rvm install 1.9.3
+rvm use 1.9.3
+rvm rubygems latest 
+</code></pre>
+
+<p>最后会告诉你：</p>
+
+<pre><code>  * To start using RVM you need to run `source /home/pangyi/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+</code></pre>
+
+<p>还要装一下rake，需要使用gem：</p>
+
+<pre><code>sudo gem install rake
+</code></pre>
+
+<h1 id="octopress">Octopress的安装</h1>
+
+<p>首先：</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress 
+</code></pre>
+
+<p>然后安装主题：</p>
+
+<pre><code>sudo gem install bundler
+bundle install
+rake install
+</code></pre>
+
+<p>在UBUNTU中需要加sudo。如果rake没装，请看上面。</p>
+
+<h2 id="ubuntu">后记——使用UBUNTU自带版本安装</h2>
+
+<p>UBUNTU自带版本为：</p>
+
+<pre><code>$ ruby -v
+ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux]
+</code></pre>
+
+<p>为了迁就octoeditor等VIM插件（从gvim启动时，无法用rvm use指定ruby版本），就需要以这个版本来安装了。安装时报了一些错误：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ bundle install
+</span><span class="line">Fetching gem metadata from https://rubygems.org/.......
+</span><span class="line">Using rake 10.3.2
+</span><span class="line">
+</span><span class="line">Gem::Installer::ExtensionBuildError: ERROR: Failed to build gem native extension.
+</span><span class="line">
+</span><span class="line">        /usr/bin/ruby1.9.1 extconf.rb 
+</span><span class="line">/usr/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require': cannot load such file -- mkmf (LoadError)
+</span><span class="line">	from /usr/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require'
+</span><span class="line">	from extconf.rb:1:in `&lt;main&gt;'
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">Gem files will remain installed in /tmp/bundler20141115-3546-1wbtw8p/RedCloth-4.2.9/gems/RedCloth-4.2.9 for inspection.
+</span><span class="line">Results logged to /tmp/bundler20141115-3546-1wbtw8p/RedCloth-4.2.9/gems/RedCloth-4.2.9/ext/redcloth_scan/gem_make.out
+</span><span class="line">An error occurred while installing RedCloth (4.2.9), and Bundler cannot
+</span><span class="line">continue.
+</span><span class="line">Make sure that `gem install RedCloth -v '4.2.9'` succeeds before bundling.</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查了一下，问题是一些相关的包，如dev包没有安装，最简单也比较土的办法是安装完全版本：</p>
+
+<pre><code>sudo apt-get install ruby1.9.1-full
+</code></pre>
+
+<p>之后bundle install就没有报错了。</p>
+
+<p>由于是重新安装，只要做bundle install就行了，不需要重新安装主题。此时rake的相关操作都可以正常执行，在vim中使用octoeditor插件时就不会出问题了。</p>
+
+<p class="post-footer">
+原文链接地址：
+<a href="http://pangyi.github.io/blog/20150125/ubuntuzhong-octopressan-zhuang/">http://pangyi.github.io/blog/20150125/ubuntuzhong-octopressan-zhuang/</a><br />
+written by <a href="http://pangyi.github.io">PangYi</a>
+&nbsp;posted at <a href="http://pangyi.github.io">http://pangyi.github.io</a>
+</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">PangYi</span></span>
+
+      
+
+
+
+
+2015年01月25日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+      
+
+<span class="tags">
+  
+    <a class='tag' href='/tags/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+<!-- JiaThis Button -->
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_fav"></a>
+	<a class="jiathis_button_twitter"></a>
+	<a class="jiathis_button_pocket"></a>
+	<a href="http://www.jiathis.com/share?uid=1980819" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1980819" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1980819"></script>
+<!-- UY END -->
+
+  
+  
+  
+  
+</div>
+
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/20150125/ubuntuxia-shi-yong-postgresql-dot-he-nginxan-zhuang-postfixadmin2-dot-92ban/" title="Previous Post: UBUNTU下使用PostgreSql.和nginx安装postfixAdmin2.92版">&laquo; UBUNTU下使用PostgreSql.和nginx安装postfixAdmin2.92版</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/20150125/octopressshi-yong-zhong-jing-yan-zong-jie/" title="Next Post: octopress使用中经验总结">octopress使用中经验总结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>最新文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/20150223/zai-ubuntu14ban-ben-shang-shi-yong-dnsmasqpei-zhi-zi-ding-yi-de-jian-yi-dnsfu-wu/">在ubuntu14版本上使用dnsmasq配置自定义的简易DNS服务</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150125/shi-yong-you-yan-zuo-octopressde-ping-lun-xi-tong-,shi-yong-jia-wang-zuo-fen-xiang/">使用友言做octopress的评论系统，使用加网做分享</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150125/zai-octopresszhong-zeng-jia-fan-hui-ding-bu-an-niu/">在octopress中增加“返回顶部”按钮</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150125/rang-octopresszhi-chi-biao-qian-(tag)/">让octopress支持标签（tag）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/20150125/wei-octopresswen-zhang-jia-ru-yuan-wen-lian-jie/">为octopress文章加入原文链接</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>标签分类</h1>
+  <ul class="tag-cloud">
+<a style="font-size: 60%" href="/tags/gpg/">GPG</a>
+<a style="font-size: 60%" href="/tags/metaweblog/">MetaWeblog</a>
+<a style="font-size: 60%" href="/tags/calibre/">calibre</a>
+<a style="font-size: 60%" href="/tags/kindle/">kindle</a>
+<a style="font-size: 60%" href="/tags/nginx/">nginx</a>
+<a style="font-size: 165%" href="/tags/octopress/">octopress</a>
+<a style="font-size: 60%" href="/tags/php/">php</a>
+<a style="font-size: 60%" href="/tags/php-fpm/">php-fpm</a>
+<a style="font-size: 60%" href="/tags/postfix/">postfix</a>
+<a style="font-size: 60%" href="/tags/postfixadmin/">postfixadmin</a>
+<a style="font-size: 60%" href="/tags/ttt/">ttt</a>
+<a style="font-size: 93%" href="/tags/vim/">vim</a>
+<a style="font-size: 60%" href="/tags/jia-mi/">加密</a>
+<a style="font-size: 60%" href="/tags/kuo-zhan/">扩展</a>
+<a style="font-size: 60%" href="/tags/cha-jian/">插件</a>
+<a style="font-size: 60%" href="/tags/ce-shi/">测试</a>
+<a style="font-size: 60%" href="/tags/mu-lu/">目录</a>
+<a style="font-size: 60%" href="/tags/wang-luo/">网络</a>
+
+  </ul>
+</section>
+<section>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/calibre/'>calibre (1)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (8)</a></li>
+<li class='category'><a href='/blog/categories/octopressce-shi/'>octopress测试 (1)</a></li>
+<li class='category'><a href='/blog/categories/postfix/'>postfix (1)</a></li>
+<li class='category'><a href='/blog/categories/vim/'>vim (2)</a></li>
+<li class='category'><a href='/blog/categories/jia-mi/'>加密 (1)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo/'>网络 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - PangYi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:150px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+	<a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+</body>
+</html>
